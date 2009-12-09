@@ -1,0 +1,9 @@
+build
+*.pbxuser
+*.mode1v3
+*.tm_build_errors
+*.dmg
+.DS_Store
+CommitVersion.xcconfig
+dsa_priv.pem
+*PlurkAPI.h*

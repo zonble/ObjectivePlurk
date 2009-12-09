@@ -1,0 +1,6 @@
+[submodule "ObjectivePlurk/ExternalLibraries/LFWebAPIKit"]
+	path = ObjectivePlurk/ExternalLibraries/LFWebAPIKit
+	url = git://github.com/lukhnos/LFWebAPIKit.git
+[submodule "ObjectivePlurk/ExternalLibraries/bsjsonadditions"]
+	path = ObjectivePlurk/ExternalLibraries/bsjsonadditions
+	url = git://github.com/blakeseely/bsjsonadditions.git
