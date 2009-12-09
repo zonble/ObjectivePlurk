@@ -332,7 +332,7 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 
 #pragma mark Polling
 
-- (void)retrieveMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate;
+- (void)retrievePollingMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate;
 
 #pragma mark Timeline
 

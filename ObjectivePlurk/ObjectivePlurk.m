@@ -198,7 +198,7 @@ static ObjectivePlurk *sharedInstance;
 		[args setObject:newPassword forKey:@"new_password"];
 	}
 	if (email) {
-		[args setObject:newPassword forKey:@"email"];
+		[args setObject:email forKey:@"email"];
 	}
 	if (displayName) {
 		[args setObject:displayName forKey:@"display_name"];
@@ -225,13 +225,16 @@ static ObjectivePlurk *sharedInstance;
 
 #pragma mark Polling
 
-- (void)retrieveMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate
+- (void)retrievePollingMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate
 {
+	NSAssert(offsetDate != nil, @"offsetDate is required");
+	
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
-	if (offsetDate) {
-		NSString *dateString = [_dateFormatter stringFromDate:offsetDate];
-		[args setObject:dateString forKey:@"offset"];
+	if (!offsetDate) {
+		offsetDate = [NSDate date];
 	}
+	NSString *dateString = [_dateFormatter stringFromDate:offsetDate];
+	[args setObject:dateString forKey:@"offset"];
 	[self addRequestWithAction:OPRetrivePollingMessageAction arguments:args delegate:delegate];
 }
 

@@ -16,7 +16,14 @@
 	STAssertNotNil(API_KEY, @"You must set your API key");
 	[ObjectivePlurk sharedInstance].APIKey = API_KEY;
 	[ObjectivePlurk sharedInstance].shouldWaitUntilDone = YES;
+	
+	// Users
 	[[ObjectivePlurk sharedInstance] loginWithUsername:ACCOUNT password:PASSWD delegate:self];
+	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"ObjectivePlurk Test" newPassword:nil email:@"example@exmaple.com" displayName:@"for unittest" privacy:OPPrivacyOnlyFriends dateOfBirth:nil delegate:self];
+	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"Objective Plurk" newPassword:nil email:@"objplurk@zonble.net" displayName:@"Objective Plurk" privacy:OPPrivacyWorld dateOfBirth:nil delegate:self];
+	
+	[[ObjectivePlurk sharedInstance] retrievePollingMessagesWithDateOffset:[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 *3] delegate:self];
+
 }
 
 - (void)_validateMessage:(NSDictionary *)message
@@ -73,6 +80,8 @@
 	STAssertNotNil([user valueForKey:@"uid"], @"The field is required.");		
 }
 
+#pragma mark Users
+
 - (void)plurk:(ObjectivePlurk *)plurk didLoggedIn:(NSDictionary *)result
 {
 //	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
@@ -96,6 +105,43 @@
 {
 	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
 }
+
+- (void)plurk:(ObjectivePlurk *)plurk didUpdateProfile:(NSDictionary *)result
+{
+//	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
+	NSString *successText = [result valueForKey:@"success_text"];
+	STAssertNotNil(successText, @"success_text should exist.");		
+	STAssertTrue([successText isEqualToString:@"ok"], @"success_text should be 'ok'.");
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailUpdatingProfile:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+#pragma mark Polling
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrievePollingMessages:(NSDictionary *)result
+{
+//	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
+	
+	NSArray *messages = [result valueForKey:@"plurks"];
+	STAssertNotNil(messages, @"There should be messages after loggin in.");
+	for (NSDictionary *message in messages) {
+		[self _validateMessage:message];
+	}
+	NSDictionary *users = [result valueForKey:@"plurk_users"];
+	STAssertNotNil(users, @"There should be a user list after loggin in.");
+	for (NSString *key in [users allKeys]) {
+		NSDictionary *user = [users valueForKey:key];
+		[self _validateUser:user];
+	}	
+	
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingPollingMessages:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
 
 
 @end
