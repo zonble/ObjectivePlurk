@@ -29,13 +29,24 @@
 		D4FFA12510D03B1800D10A53 /* LFSiteReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = D4FFA09110D0381B00D10A53 /* LFSiteReachability.h */; };
 		D4FFA12610D03B1800D10A53 /* LFWebAPIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D4FFA09310D0381B00D10A53 /* LFWebAPIKit.h */; };
 		D4FFA12710D03B1800D10A53 /* NSData+LFHTTPFormExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4FFA09410D0381B00D10A53 /* NSData+LFHTTPFormExtensions.h */; };
+		D4FFA26710D0453400D10A53 /* ObjectivePlurk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* ObjectivePlurk.framework */; };
+		D4FFA27B10D0457600D10A53 /* ObjectivePlurkTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FFA27A10D0457600D10A53 /* ObjectivePlurkTest.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4FFA26110D0453000D10A53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* ObjectivePlurk */;
+			remoteInfo = ObjectivePlurk;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		32DBCF5E0370ADEE00C91783 /* ObjectivePlurk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectivePlurk_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* ObjectivePlurk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectivePlurk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -61,6 +72,11 @@
 		D4FFA0B110D0383E00D10A53 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+BSJSONAdditions.h"; path = "ExternalLibraries/bsjsonadditions/NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		D4FFA0B210D0383E00D10A53 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+BSJSONAdditions.m"; path = "ExternalLibraries/bsjsonadditions/NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		D4FFA0C010D0385400D10A53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D4FFA1DE10D0416800D10A53 /* ObjectivePlurkTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectivePlurkTest-Info.plist"; sourceTree = "<group>"; };
+		D4FFA20410D042B100D10A53 /* PlurkAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlurkAPIKey.h; sourceTree = "<group>"; };
+		D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ObjectivePlurkTest.octest; path = build/Debug/ObjectivePlurkTest.octest; sourceTree = "<group>"; };
+		D4FFA27910D0457600D10A53 /* ObjectivePlurkTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectivePlurkTest.h; path = Tests/ObjectivePlurkTest.h; sourceTree = "<group>"; };
+		D4FFA27A10D0457600D10A53 /* ObjectivePlurkTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectivePlurkTest.m; path = Tests/ObjectivePlurkTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +89,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4FFA25810D0451B00D10A53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4FFA26710D0453400D10A53 /* ObjectivePlurk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -80,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC2EF5B0486A6940098B216 /* ObjectivePlurk.framework */,
+				D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,12 +112,14 @@
 		0867D691FE84028FC02AAC07 /* ObjectivePlurk */ = {
 			isa = PBXGroup;
 			children = (
-				D4FFA08710D037CA00D10A53 /* ExternalLibraries */,
+				D4FFA1F410D041C300D10A53 /* Tests */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
+				D4FFA08710D037CA00D10A53 /* ExternalLibraries */,
 				089C1665FE841158C02AAC07 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				D4FFA1DE10D0416800D10A53 /* ObjectivePlurkTest-Info.plist */,
 			);
 			name = ObjectivePlurk;
 			sourceTree = "<group>";
@@ -147,7 +174,6 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32DBCF5E0370ADEE00C91783 /* ObjectivePlurk_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -192,6 +218,16 @@
 			name = bsjsonadditions;
 			sourceTree = "<group>";
 		};
+		D4FFA1F410D041C300D10A53 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D4FFA27910D0457600D10A53 /* ObjectivePlurkTest.h */,
+				D4FFA27A10D0457600D10A53 /* ObjectivePlurkTest.m */,
+				D4FFA20410D042B100D10A53 /* PlurkAPIKey.h */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -234,6 +270,25 @@
 			productReference = 8DC2EF5B0486A6940098B216 /* ObjectivePlurk.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D4FFA25A10D0451B00D10A53 /* ObjectivePlurkTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4FFA27810D0454F00D10A53 /* Build configuration list for PBXNativeTarget "ObjectivePlurkTest" */;
+			buildPhases = (
+				D4FFA25610D0451B00D10A53 /* Resources */,
+				D4FFA25710D0451B00D10A53 /* Sources */,
+				D4FFA25810D0451B00D10A53 /* Frameworks */,
+				D4FFA25910D0451B00D10A53 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4FFA26210D0453000D10A53 /* PBXTargetDependency */,
+			);
+			name = ObjectivePlurkTest;
+			productName = ObjectivePlurkTest;
+			productReference = D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -248,6 +303,7 @@
 			projectRoot = "";
 			targets = (
 				8DC2EF4F0486A6940098B216 /* ObjectivePlurk */,
+				D4FFA25A10D0451B00D10A53 /* ObjectivePlurkTest */,
 			);
 		};
 /* End PBXProject section */
@@ -260,7 +316,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4FFA25610D0451B00D10A53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4FFA25910D0451B00D10A53 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DC2EF540486A6940098B216 /* Sources */ = {
@@ -280,7 +359,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4FFA25710D0451B00D10A53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4FFA27B10D0457600D10A53 /* ObjectivePlurkTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4FFA26210D0453000D10A53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DC2EF4F0486A6940098B216 /* ObjectivePlurk */;
+			targetProxy = D4FFA26110D0453000D10A53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91AE08733DA50010E9CD /* Debug */ = {
@@ -346,6 +441,60 @@
 			};
 			name = Release;
 		};
+		D4FFA25C10D0451C00D10A53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "ObjectivePlurkTest-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = ObjectivePlurkTest;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D4FFA25D10D0451C00D10A53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "ObjectivePlurkTest-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = ObjectivePlurkTest;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -363,6 +512,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4FFA27810D0454F00D10A53 /* Build configuration list for PBXNativeTarget "ObjectivePlurkTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4FFA25C10D0451C00D10A53 /* Debug */,
+				D4FFA25D10D0451C00D10A53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

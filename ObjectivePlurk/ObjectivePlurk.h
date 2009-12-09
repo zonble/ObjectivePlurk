@@ -410,5 +410,6 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 @property (readonly) NSDictionary *langCodes;
 @property (readonly, getter=isLoggedIn) BOOL loggedIn;
 @property (copy, nonatomic) NSDictionary *currentUserInfo;
+@property (assign) BOOL shouldWaitUntilDone;
 
 @end

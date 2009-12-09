@@ -78,7 +78,15 @@ static ObjectivePlurk *sharedInstance;
 	return self;
 }
 
+- (BOOL)shouldWaitUntilDone
+{
+	return [_request shouldWaitUntilDone];
+}
 
+- (void)setShouldWaitUntilDone:(BOOL)waitUntilDone
+{
+	[_request setShouldWaitUntilDone:waitUntilDone];
+}
 
 - (void)cancelAllRequest
 {
