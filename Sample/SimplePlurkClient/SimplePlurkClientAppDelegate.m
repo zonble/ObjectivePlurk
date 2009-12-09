@@ -2,21 +2,17 @@
 //  SimplePlurkClientAppDelegate.m
 //  SimplePlurkClient
 //
-//  Created by zonble on 12/10/09.
-//  Copyright 2009 Lithoglyph Inc.. All rights reserved.
-//
 
 #import "SimplePlurkClientAppDelegate.h"
 
 @implementation SimplePlurkClientAppDelegate
 
-- (void) dealloc
+- (void)dealloc
 {
 	[loginName release];
 	[password release];
 	[super dealloc];
 }
-
 
 - (id)init
 {
@@ -69,7 +65,6 @@
 {
 	[ObjectivePlurk sharedInstance].APIKey = API_KEY;
 	[self showLoginSheet:self];
-	// Insert code here to initialize your application 
 }
 
 - (void)plurk:(ObjectivePlurk *)plurk didLoggedIn:(NSDictionary *)result

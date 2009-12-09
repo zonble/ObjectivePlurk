@@ -2,13 +2,13 @@
 //  SimplePlurkClientAppDelegate.h
 //  SimplePlurkClient
 //
-//  Created by zonble on 12/10/09.
-//  Copyright 2009 Lithoglyph Inc.. All rights reserved.
-//
 
 #import <Cocoa/Cocoa.h>
 #import "ObjectivePlurk.h"
-#import "PlurkAPIKey.h"
+//#import "PlurkAPIKey.h"
+#ifndef API_KEY
+#define API_KEY @""
+#endif
 
 @interface SimplePlurkClientAppDelegate : NSObject <NSApplicationDelegate>
 {
