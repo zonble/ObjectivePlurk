@@ -7,3 +7,4 @@ build
 CommitVersion.xcconfig
 dsa_priv.pem
 *PlurkAPI.h*
+*PlurkAPIKey.h*
