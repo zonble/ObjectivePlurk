@@ -261,6 +261,9 @@ static ObjectivePlurk *sharedInstance;
 		[args setObject:[[NSNumber numberWithInt:limit] stringValue] forKey:@"limit"];
 	}
 	if (userID) {
+		if ([userID isKindOfClass:[NSNumber class]]) {
+			userID = [(NSNumber *)userID stringValue];
+		}
 		[args setObject:userID forKey:@"only_user"];
 	}
 	if (isResponded) {
@@ -342,6 +345,10 @@ static ObjectivePlurk *sharedInstance;
 
 - (void)retrieveResponsesWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate
 {
+	if ([identifer isKindOfClass:[NSNumber class]]) {
+		identifer = [(NSNumber *)identifer stringValue];
+	}
+	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", nil];
 	[self addRequestWithAction:OPRetriveResponsesAction arguments:args delegate:delegate];
 }
@@ -353,13 +360,18 @@ static ObjectivePlurk *sharedInstance;
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", content, @"content", qualifier, @"qualifier", nil];
 	[self addRequestWithAction:OPAddResponsesAction arguments:args delegate:delegate];
 }
-- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate
+- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer responseIdentifier:(NSString *)responseIdentifier delegate:(id)delegate
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
 	}
+	if ([responseIdentifier isKindOfClass:[NSNumber class]]) {
+		responseIdentifier = [(NSNumber *)responseIdentifier stringValue];
+	}
+	NSAssert(identifer != nil, @"");
+	NSAssert(responseIdentifier != nil, @"");
 	
-	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", nil];
+	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", responseIdentifier, @"response_id", nil];
 	[self addRequestWithAction:OPDeleteResponsesAction arguments:args delegate:delegate];
 }
 

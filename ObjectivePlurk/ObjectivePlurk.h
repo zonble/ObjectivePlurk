@@ -351,7 +351,7 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 
 - (void)retrieveResponsesWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate;
 - (void)addNewResponseWithContent:(NSString *)content qualifier:(NSString *)qualifier toMessages:(NSString *)identifer delegate:(id)delegate;
-- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate;
+- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer responseIdentifier:(NSString *)responseIdentifier delegate:(id)delegate;
 
 #pragma mark Profiles
 

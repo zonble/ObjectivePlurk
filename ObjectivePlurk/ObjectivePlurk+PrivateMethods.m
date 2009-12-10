@@ -60,7 +60,7 @@ NSString *const OPEditMessageAction = @"/API/Timeline/plurkEdit";
 
 NSString *const OPRetriveResponsesAction = @"/API/Responses/get";
 NSString *const OPAddResponsesAction = @"/API/Responses/responseAdd";
-NSString *const OPDeleteResponsesAction = @"/API/Timeline/responseDelete";
+NSString *const OPDeleteResponsesAction = @"/API/Responses/responseDelete";
 
 NSString *const OPRetrieveMyProfileAction = @"/API/Profile/getOwnProfile";
 NSString *const OPRetrievePublicProfileAction = @"/API/Profile/getPublicProfile";
@@ -881,13 +881,13 @@ NSString *mimeTypeForExtension(NSString *ext)
 	else {
 		NSString *s = [[[NSString alloc] initWithData:[request receivedData] encoding:NSUTF8StringEncoding] autorelease];
 		if (!s) {
-			[self httpRequest:request didFailWithError:@"Failed to fetch contents."]; return;
+			[self httpRequest:request didFailWithError:@"Failed to fetch contents. (1)"]; return;
 		}
 
 		NSDictionary *result = [NSDictionary dictionaryWithJSONString:s];
 
 		if (!result) {
-			[self httpRequest:request didFailWithError:@"Failed to fetch contents."]; return;
+			[self httpRequest:request didFailWithError:@"Failed to parse contents"]; return;
 		}
 
 		NSMutableDictionary *sessionInfoWithResult = [NSMutableDictionary dictionaryWithDictionary:sessionInfo];

@@ -12,7 +12,7 @@
 
 @interface ObjectivePlurkTest : SenTestCase 
 {
-
+	NSDictionary *currentUserInfo;
 }
 
 - (void)testAPI;
