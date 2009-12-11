@@ -326,84 +326,84 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 
 #pragma mark Users
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(id)delegate;
-- (void)updatePictureWithFile:(NSString *)path delegate:(id)delegate;
-- (void)updateProfileWithOldPassword:(NSString *)oldPassword fullname:(NSString *)fullname newPassword:(NSString *)newPassword email:(NSString *)email displayName:(NSString *)displayName privacy:(OPPrivacy)privacy dateOfBirth:(NSString *)dateOfBirth delegate:(id)delegate;
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)updatePictureWithFile:(NSString *)path delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)updateProfileWithOldPassword:(NSString *)oldPassword fullname:(NSString *)fullname newPassword:(NSString *)newPassword email:(NSString *)email displayName:(NSString *)displayName privacy:(OPPrivacy)privacy dateOfBirth:(NSString *)dateOfBirth delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Polling
 
-- (void)retrievePollingMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate;
+- (void)retrievePollingMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Timeline
 
-- (void)retrieveMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate;
-- (void)retrieveMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit user:(NSString *)userID isResponded:(BOOL)isResponded isPrivate:(BOOL)isPrivate delegate:(id)delegate;
-- (void)retrieveUnreadMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit delegate:(id)delegate;
-- (void)muteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate;
-- (void)unmuteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate;
-- (void)markMessagesAsReadWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate;
-- (void)addNewMessageWithContent:(NSString *)content qualifier:(NSString *)qualifier othersCanComment:(OPCanComment)canComment lang:(NSString *)lang limitToUsers:(NSArray *)users delegate:(id)delegate;
-- (void)uploadPicture:(NSString *)path delegate:(id)delegate;
-- (void)deleteMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate;
-- (void)editMessageWithMessageIdentifier:(NSString *)identifer content:(NSString *)content delegate:(id)delegate;
+- (void)retrieveMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrieveMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit user:(NSString *)userID isResponded:(BOOL)isResponded isPrivate:(BOOL)isPrivate delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrieveUnreadMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)muteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)unmuteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)markMessagesAsReadWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addNewMessageWithContent:(NSString *)content qualifier:(NSString *)qualifier othersCanComment:(OPCanComment)canComment lang:(NSString *)lang limitToUsers:(NSArray *)users delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)uploadPicture:(NSString *)path delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)deleteMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)editMessageWithMessageIdentifier:(NSString *)identifer content:(NSString *)content delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Responses
 
-- (void)retrieveResponsesWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate;
-- (void)addNewResponseWithContent:(NSString *)content qualifier:(NSString *)qualifier toMessages:(NSString *)identifer delegate:(id)delegate;
-- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer responseIdentifier:(NSString *)responseIdentifier delegate:(id)delegate;
+- (void)retrieveResponsesWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addNewResponseWithContent:(NSString *)content qualifier:(NSString *)qualifier toMessages:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer responseIdentifier:(NSString *)responseIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Profiles
 
-- (void)retrieveMyProfileWithDelegate:(id)delegate;
-- (void)retrievePublicProfileWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate;
+- (void)retrieveMyProfileWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrievePublicProfileWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Friends and fans
 
-- (void)retrieveFriendsOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate;
-- (void)retrieveFansOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate;
-- (void)retrieveFollowingUsersOfCurrentUserWithOffset:(NSUInteger)offset delegate:(id)delegate;
-- (void)becomeFriendOfUser:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)removeFriendshipWithUser:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)becomeFanOfUser:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)setFollowingUser:(NSString *)userIdentifier follow:(BOOL)follow delegate:(id)delegate;
-- (void)retrieveFriendsCompletionList:(id)delegate;
+- (void)retrieveFriendsOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrieveFansOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrieveFollowingUsersOfCurrentUserWithOffset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)becomeFriendOfUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)removeFriendshipWithUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)becomeFanOfUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)setFollowingUser:(NSString *)userIdentifier follow:(BOOL)follow delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrieveFriendsCompletionList:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Alerts
 
-- (void)retriveActiveAlertsWithDelegate:(id)delegate;
-- (void)retrivetHistoryWithDelegate:(id)delegate;
-- (void)addAsFanWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)addAllAsFanWithDelegate:(id)delegate;
-- (void)addAsFriendWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)addAllAsFriendWithDelegate:(id)delegate;
-- (void)denyFriendshipWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)removeNotificationWithDelegate:(id)delegate;
+- (void)retriveActiveAlertsWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrivetHistoryWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addAsFanWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addAllAsFanWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addAsFriendWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addAllAsFriendWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)denyFriendshipWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)removeNotificationWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Search
 
-- (void)searchMessagesWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate;
-- (void)searchUsersWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate;
+- (void)searchMessagesWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)searchUsersWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Emoticons
 
-- (void)retriveEmoticonsWithDelegate:(id)delegate;
+- (void)retriveEmoticonsWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Blocks
 
-- (void)retrieveBlockedUsersWithDelegate:(id)delegate;
-- (void)blockUser:(NSString *)userIdentifier delegate:(id)delegate;
-- (void)unblockUser:(NSString *)userIdentifier delegate:(id)delegate;
+- (void)retrieveBlockedUsersWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)blockUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)unblockUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 #pragma mark Cliques
 
-- (void)retrieveCliquesWithDelegate:(id)delegate;
-- (void)createNewCliqueWithName:(NSString *)cliqueName delegate:(id)delegate;
-- (void)retrieveCliqueWithName:(NSString *)cliqueName delegate:(id)delegate;
-- (void)renameCliqueWithOldName:(NSString *)oldName newName:(NSString *)newName delegate:(id)delegate;
-- (void)deleteCliqueWithName:(NSString *)cliqueName delegate:(id)delegate;
-- (void)addUser:(NSString *)userIdentifier toClique:(NSString *)cliqueName delegate:(id)delegate;
-- (void)removeUser:(NSString *)userIdentifier fromClique:(NSString *)cliqueName delegate:(id)delegate;
+- (void)retrieveCliquesWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)createNewCliqueWithName:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)retrieveCliqueWithName:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)renameCliqueWithOldName:(NSString *)oldName newName:(NSString *)newName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)deleteCliqueWithName:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addUser:(NSString *)userIdentifier toClique:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)removeUser:(NSString *)userIdentifier fromClique:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 @property (retain, nonatomic) NSString *APIKey;
 @property (readonly) NSArray *qualifiers;

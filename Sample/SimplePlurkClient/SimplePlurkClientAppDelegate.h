@@ -5,7 +5,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ObjectivePlurk.h"
-//#import "PlurkAPIKey.h"
+#import "PlurkAPIKey.h"
 #ifndef API_KEY
 #define API_KEY @""
 #endif

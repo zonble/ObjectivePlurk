@@ -38,7 +38,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* ObjectivePlurk */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = ObjectivePlurk;
 		};
 /* End PBXContainerItemProxy section */
@@ -74,7 +74,7 @@
 		D4FFA0C010D0385400D10A53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D4FFA1DE10D0416800D10A53 /* ObjectivePlurkTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectivePlurkTest-Info.plist"; sourceTree = "<group>"; };
 		D4FFA20410D042B100D10A53 /* PlurkAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlurkAPIKey.h; sourceTree = "<group>"; };
-		D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ObjectivePlurkTest.octest; path = build/Debug/ObjectivePlurkTest.octest; sourceTree = "<group>"; };
+		D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectivePlurkTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4FFA27910D0457600D10A53 /* ObjectivePlurkTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectivePlurkTest.h; path = Tests/ObjectivePlurkTest.h; sourceTree = "<group>"; };
 		D4FFA27A10D0457600D10A53 /* ObjectivePlurkTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectivePlurkTest.m; path = Tests/ObjectivePlurkTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */

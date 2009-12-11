@@ -266,13 +266,19 @@ NSString *mimeTypeForExtension(NSString *ext)
 	}
 }
 
-- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments filepath:(NSString *)filepath multipartName:(NSString *)multipartName delegate:(id)delegate
+- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments filepath:(NSString *)filepath multipartName:(NSString *)multipartName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSString *URLString = [ObjectivePlurkAPIURLString stringByAppendingString:actionName];
 	URLString = [URLString stringByAppendingString:[self GETStringFromDictionary:arguments]];
 	NSURL *URL = [NSURL URLWithString:URLString];
-	NSDictionary *sessionInfo = [NSDictionary dictionaryWithObjectsAndKeys:actionName, @"actionName", URL, @"URL", delegate, @"delegate", arguments, @"arguments", nil];
-
+	//	NSDictionary *sessionInfo = [NSDictionary dictionaryWithObjectsAndKeys:actionName, @"actionName", URL, @"URL", delegate, @"delegate", arguments, @"arguments", nil];
+	NSMutableDictionary *sessionInfo = [NSMutableDictionary dictionary];
+	[sessionInfo setObject:actionName forKey:@"actionName"];
+	[sessionInfo setObject:URL forKey:@"URL"];
+	if (delegate) [sessionInfo setObject:delegate forKey:@"delegate"];
+	if (arguments) [sessionInfo setObject:arguments forKey:@"arguments"];
+	if (userInfo) [sessionInfo setObject:userInfo forKey:@"userInfo"];
+	
 	if (filepath) {
 		[_request cancelWithoutDelegateMessage];
 		[self uploadFile:filepath suggestedFilename:[filepath lastPathComponent] requestURL:URL multipartName:multipartName sessionInfo:sessionInfo];
@@ -291,9 +297,9 @@ NSString *mimeTypeForExtension(NSString *ext)
 	}
 }
 
-- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments delegate:(id)delegate
+- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:actionName arguments:arguments filepath:nil multipartName:nil delegate:delegate];
+	[self addRequestWithAction:actionName arguments:arguments filepath:nil multipartName:nil delegate:delegate userInfo:userInfo];
 }
 
 - (void)loginDidSuccess:(LFHTTPRequest *)request

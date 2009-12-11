@@ -38,8 +38,8 @@
 
 - (NSString *)GETStringFromDictionary:(NSDictionary *)inDictionary;
 - (void)runQueue;
-- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments filepath:(NSString *)filepath multipartName:(NSString *)multipartName delegate:(id)delegate;
-- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments delegate:(id)delegate;
+- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments filepath:(NSString *)filepath multipartName:(NSString *)multipartName delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
+- (void)addRequestWithAction:(NSString *)actionName arguments:(NSDictionary *)arguments delegate:(id)delegate userInfo:(NSDictionary *)userInfo;
 
 - (void)loginDidSuccess:(LFHTTPRequest *)request;
 - (void)loginDidFail:(NSError *)error;

@@ -49,7 +49,7 @@
 - (IBAction)loginAction:(id)sender
 {
 	[self setLoginUIEnabled:NO];
-	[[ObjectivePlurk sharedInstance] loginWithUsername:loginName password:password delegate:self];
+	[[ObjectivePlurk sharedInstance] loginWithUsername:loginName password:password delegate:self userInfo:nil];
 	[loginProgressIndicator setHidden:NO];
 	[loginProgressIndicator startAnimation:self];
 }

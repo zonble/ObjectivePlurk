@@ -18,18 +18,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D48B536410D2AE7C00434553 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FFA0F310D039C400D10A53 /* ObjectivePlurk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */;
+			remoteInfo = ObjectivePlurkTest;
+		};
 		D4FFA0F710D039C400D10A53 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4FFA0F310D039C400D10A53 /* ObjectivePlurk.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* ObjectivePlurk.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = ObjectivePlurk;
 		};
 		D4FFA0FD10D039F700D10A53 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4FFA0F310D039C400D10A53 /* ObjectivePlurk.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* ObjectivePlurk */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = ObjectivePlurk;
 		};
 /* End PBXContainerItemProxy section */
@@ -162,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				D4FFA0F810D039C400D10A53 /* ObjectivePlurk.framework */,
+				D48B536510D2AE7C00434553 /* ObjectivePlurkTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,6 +221,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D48B536510D2AE7C00434553 /* ObjectivePlurkTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ObjectivePlurkTest.octest;
+			remoteRef = D48B536410D2AE7C00434553 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D4FFA0F810D039C400D10A53 /* ObjectivePlurk.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

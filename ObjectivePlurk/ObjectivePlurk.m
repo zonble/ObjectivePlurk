@@ -173,20 +173,20 @@ static ObjectivePlurk *sharedInstance;
 #pragma mark -
 #pragma mark Users
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(id)delegate
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSAssert(username, @"Username is required");
 	NSAssert(username, @"Password is required");
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil];
-	[self addRequestWithAction:OPLoginAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPLoginAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)updatePictureWithFile:(NSString *)path delegate:(id)delegate
+- (void)updatePictureWithFile:(NSString *)path delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPUpdatePictureAction arguments:nil filepath:path multipartName:@"profile_image" delegate:delegate];
+	[self addRequestWithAction:OPUpdatePictureAction arguments:nil filepath:path multipartName:@"profile_image" delegate:delegate userInfo:userInfo];
 }
 
-- (void)updateProfileWithOldPassword:(NSString *)oldPassword fullname:(NSString *)fullname newPassword:(NSString *)newPassword email:(NSString *)email displayName:(NSString *)displayName privacy:(OPPrivacy)privacy dateOfBirth:(NSString *)dateOfBirth delegate:(id)delegate
+- (void)updateProfileWithOldPassword:(NSString *)oldPassword fullname:(NSString *)fullname newPassword:(NSString *)newPassword email:(NSString *)email displayName:(NSString *)displayName privacy:(OPPrivacy)privacy dateOfBirth:(NSString *)dateOfBirth delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];	
 	NSAssert(oldPassword, @"oldPassword is required");
@@ -220,12 +220,12 @@ static ObjectivePlurk *sharedInstance;
 			break;
 	}
 	
-	[self addRequestWithAction:OPUpdateProfileAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPUpdateProfileAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
 #pragma mark Polling
 
-- (void)retrievePollingMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate
+- (void)retrievePollingMessagesWithDateOffset:(NSDate *)offsetDate delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSAssert(offsetDate != nil, @"offsetDate is required");
 	
@@ -235,22 +235,22 @@ static ObjectivePlurk *sharedInstance;
 	}
 	NSString *dateString = [_dateFormatter stringFromDate:offsetDate];
 	[args setObject:dateString forKey:@"offset"];
-	[self addRequestWithAction:OPRetrivePollingMessageAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetrivePollingMessageAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
 #pragma mark Timeline
 
-- (void)retrieveMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate
+- (void)retrieveMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
 	}
 	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", nil];
-	[self addRequestWithAction:OPRetriveMessageAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveMessageAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)retrieveMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit user:(NSString *)userID isResponded:(BOOL)isResponded isPrivate:(BOOL)isPrivate delegate:(id)delegate
+- (void)retrieveMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit user:(NSString *)userID isResponded:(BOOL)isResponded isPrivate:(BOOL)isPrivate delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	if (offsetDate) {
@@ -272,11 +272,11 @@ static ObjectivePlurk *sharedInstance;
 	if (isPrivate) {
 		[args setObject:@"true" forKey:@"only_private"];
 	}
-	[self addRequestWithAction:OPRetriveMessagesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveMessagesAction arguments:args delegate:delegate userInfo:userInfo];
 	
 }
 
-- (void)retrieveUnreadMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit delegate:(id)delegate
+- (void)retrieveUnreadMessagesWithDateOffset:(NSDate *)offsetDate limit:(NSInteger)limit delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	if (offsetDate) {
@@ -286,81 +286,81 @@ static ObjectivePlurk *sharedInstance;
 	if (limit) {
 		[args setObject:[[NSNumber numberWithInt:limit] stringValue] forKey:@"limit"];
 	}
-	[self addRequestWithAction:OPRetriveUnreadMessagesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveUnreadMessagesAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)muteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate
+- (void)muteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:[identifiers jsonStringValue], @"ids", nil];
-	[self addRequestWithAction:OPMuteMessagesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPMuteMessagesAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)unmuteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate
+- (void)unmuteMessagesWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:[identifiers jsonStringValue], @"ids", nil];
-	[self addRequestWithAction:OPUnmuteMessagesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPUnmuteMessagesAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)markMessagesAsReadWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate
+- (void)markMessagesAsReadWithMessageIdentifiers:(NSArray *)identifiers delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:[identifiers jsonStringValue], @"ids", nil];
-	[self addRequestWithAction:OPMarkMessageAsReadAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPMarkMessageAsReadAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)addNewMessageWithContent:(NSString *)content qualifier:(NSString *)qualifier othersCanComment:(OPCanComment)canComment lang:(NSString *)lang limitToUsers:(NSArray *)users delegate:(id)delegate
+- (void)addNewMessageWithContent:(NSString *)content qualifier:(NSString *)qualifier othersCanComment:(OPCanComment)canComment lang:(NSString *)lang limitToUsers:(NSArray *)users delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSString *limitString = @"";
 	if ([users count]) {
 		limitString = [users jsonStringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:content, @"content", qualifier, @"qualifier", [[NSNumber numberWithInt:canComment] stringValue], @"no_comments", lang, @"lang", limitString, @"limited_to", nil];
-	[self addRequestWithAction:OPAddMessageAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPAddMessageAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)uploadPicture:(NSString *)path delegate:(id)delegate
+- (void)uploadPicture:(NSString *)path delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPUploadPictureAction arguments:nil filepath:path multipartName:@"image" delegate:delegate];
+	[self addRequestWithAction:OPUploadPictureAction arguments:nil filepath:path multipartName:@"image" delegate:delegate userInfo:userInfo];
 }
 
-- (void)deleteMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate
+- (void)deleteMessageWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
 	}
 	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", nil];
-	[self addRequestWithAction:OPDeleteMessageAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPDeleteMessageAction arguments:args delegate:delegate userInfo:userInfo];	
 }
-- (void)editMessageWithMessageIdentifier:(NSString *)identifer content:(NSString *)content delegate:(id)delegate
+- (void)editMessageWithMessageIdentifier:(NSString *)identifer content:(NSString *)content delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
 	}
 	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", content, @"content", nil];
-	[self addRequestWithAction:OPEditMessageAction arguments:args delegate:delegate];		
+	[self addRequestWithAction:OPEditMessageAction arguments:args delegate:delegate userInfo:userInfo];		
 }
 
 #pragma mark Responses
 
-- (void)retrieveResponsesWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate
+- (void)retrieveResponsesWithMessageIdentifier:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
 	}
 	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", nil];
-	[self addRequestWithAction:OPRetriveResponsesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveResponsesAction arguments:args delegate:delegate userInfo:userInfo];
 }
-- (void)addNewResponseWithContent:(NSString *)content qualifier:(NSString *)qualifier toMessages:(NSString *)identifer delegate:(id)delegate
+- (void)addNewResponseWithContent:(NSString *)content qualifier:(NSString *)qualifier toMessages:(NSString *)identifer delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", content, @"content", qualifier, @"qualifier", nil];
-	[self addRequestWithAction:OPAddResponsesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPAddResponsesAction arguments:args delegate:delegate userInfo:userInfo];
 }
-- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer responseIdentifier:(NSString *)responseIdentifier delegate:(id)delegate
+- (void)deleteResponseWithMessageIdentifier:(NSString *)identifer responseIdentifier:(NSString *)responseIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([identifer isKindOfClass:[NSNumber class]]) {
 		identifer = [(NSNumber *)identifer stringValue];
@@ -372,29 +372,29 @@ static ObjectivePlurk *sharedInstance;
 	NSAssert(responseIdentifier != nil, @"");
 	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:identifer, @"plurk_id", responseIdentifier, @"response_id", nil];
-	[self addRequestWithAction:OPDeleteResponsesAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPDeleteResponsesAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
 #pragma mark Profiles
 
-- (void)retrieveMyProfileWithDelegate:(id)delegate
+- (void)retrieveMyProfileWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetrieveMyProfileAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetrieveMyProfileAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)retrievePublicProfileWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate
+- (void)retrievePublicProfileWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
-	[self addRequestWithAction:OPRetrievePublicProfileAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPRetrievePublicProfileAction arguments:args delegate:delegate userInfo:userInfo];	
 }
 
 #pragma mark Friends and fans
 
-- (void)retrieveFriendsOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate
+- (void)retrieveFriendsOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
@@ -404,10 +404,10 @@ static ObjectivePlurk *sharedInstance;
 	if (offset) {
 		[args setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
 	}
-	[self addRequestWithAction:OPRetriveFriendAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveFriendAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)retrieveFansOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate
+- (void)retrieveFansOfUser:(NSString *)userIdentifier offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
@@ -417,216 +417,216 @@ static ObjectivePlurk *sharedInstance;
 	if (offset) {
 		[args setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
 	}
-	[self addRequestWithAction:OPRetriveFansAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveFansAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)retrieveFollowingUsersOfCurrentUserWithOffset:(NSUInteger)offset delegate:(id)delegate
+- (void)retrieveFollowingUsersOfCurrentUserWithOffset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	if (offset) {
 		[args setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
 	}
-	[self addRequestWithAction:OPRetriveFollowingAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRetriveFollowingAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)becomeFriendOfUser:(NSString *)userIdentifier delegate:(id)delegate
+- (void)becomeFriendOfUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"friend_id", nil];
-	[self addRequestWithAction:OPBecomeFriendAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPBecomeFriendAction arguments:args delegate:delegate userInfo:userInfo];	
 }
 
-- (void)removeFriendshipWithUser:(NSString *)userIdentifier delegate:(id)delegate
+- (void)removeFriendshipWithUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"friend_id", nil];
-	[self addRequestWithAction:OPRemoveFriendshipAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPRemoveFriendshipAction arguments:args delegate:delegate userInfo:userInfo];	
 }
 
-- (void)becomeFanOfUser:(NSString *)userIdentifier delegate:(id)delegate
+- (void)becomeFanOfUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"fan_id", nil];
-	[self addRequestWithAction:OPBecomeFanAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPBecomeFanAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)setFollowingUser:(NSString *)userIdentifier follow:(BOOL)follow delegate:(id)delegate
+- (void)setFollowingUser:(NSString *)userIdentifier follow:(BOOL)follow delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSString *followString = follow ? @"true": @"false";
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", followString, @"follow", nil];
-	[self addRequestWithAction:OPSetFollowingAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPSetFollowingAction arguments:args delegate:delegate userInfo:userInfo];
 	
 }
 
-- (void)retrieveFriendsCompletionList:(id)delegate
+- (void)retrieveFriendsCompletionList:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetrieveFriendsCompletionListAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetrieveFriendsCompletionListAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
 #pragma mark Alerts
 
-- (void)retriveActiveAlertsWithDelegate:(id)delegate
+- (void)retriveActiveAlertsWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetriveActiveAlertsAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetriveActiveAlertsAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)retrivetHistoryWithDelegate:(id)delegate
+- (void)retrivetHistoryWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetriveHistoryAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetriveHistoryAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)addAsFanWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate
+- (void)addAsFanWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
-	[self addRequestWithAction:OPAddAsFanAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPAddAsFanAction arguments:args delegate:delegate userInfo:userInfo];	
 }
 
-- (void)addAllAsFanWithDelegate:(id)delegate
+- (void)addAllAsFanWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPAddAllAsFanAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPAddAllAsFanAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)addAsFriendWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate
-{
-	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
-		userIdentifier = [(NSNumber *)userIdentifier stringValue];
-	}
-	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
-	[self addRequestWithAction:OPAddAsFriendAction arguments:args delegate:delegate];		
-}
-
-- (void)addAllAsFriendWithDelegate:(id)delegate
-{
-	[self addRequestWithAction:OPAddAllAsFriendAction arguments:nil delegate:delegate];
-}
-
-- (void)denyFriendshipWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate
+- (void)addAsFriendWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
-	[self addRequestWithAction:OPDenyFriendshipAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPAddAsFriendAction arguments:args delegate:delegate userInfo:userInfo];		
 }
 
-- (void)removeNotificationWithDelegate:(id)delegate
+- (void)addAllAsFriendWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRemoveNotificationAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPAddAllAsFriendAction arguments:nil delegate:delegate userInfo:userInfo];
+}
+
+- (void)denyFriendshipWithUserIdentifier:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
+{
+	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
+		userIdentifier = [(NSNumber *)userIdentifier stringValue];
+	}
+	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
+	[self addRequestWithAction:OPDenyFriendshipAction arguments:args delegate:delegate userInfo:userInfo];	
+}
+
+- (void)removeNotificationWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
+{
+	[self addRequestWithAction:OPRemoveNotificationAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
 #pragma mark Search
 
-- (void)searchMessagesWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate
+- (void)searchMessagesWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	[args setObject:query forKey:@"query"];
 	if (offset) {
 		[args setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
 	}	
-	[self addRequestWithAction:OPSearchMessagesAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPSearchMessagesAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)searchUsersWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate
+- (void)searchUsersWithQuery:(NSString *)query offset:(NSUInteger)offset delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSMutableDictionary *args = [NSMutableDictionary dictionary];
 	[args setObject:query forKey:@"query"];
 	if (offset) {
 		[args setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
 	}	
-	[self addRequestWithAction:OPSearchUsersAction arguments:nil delegate:delegate];	
+	[self addRequestWithAction:OPSearchUsersAction arguments:nil delegate:delegate userInfo:userInfo];	
 }
 
 #pragma mark Emoticons
 
-- (void)retriveEmoticonsWithDelegate:(id)delegate
+- (void)retriveEmoticonsWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetrieveEmoticonsAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetrieveEmoticonsAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
 #pragma mark Blocks
 
-- (void)retrieveBlockedUsersWithDelegate:(id)delegate
+- (void)retrieveBlockedUsersWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetrieveBlockedUsersAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetrieveBlockedUsersAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)blockUser:(NSString *)userIdentifier delegate:(id)delegate
+- (void)blockUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
-	[self addRequestWithAction:OPBlockuUserAction arguments:args delegate:delegate];		
+	[self addRequestWithAction:OPBlockuUserAction arguments:args delegate:delegate userInfo:userInfo];		
 }
 
-- (void)unblockUser:(NSString *)userIdentifier delegate:(id)delegate
+- (void)unblockUser:(NSString *)userIdentifier delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", nil];
-	[self addRequestWithAction:OPUnblockuUserAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPUnblockuUserAction arguments:args delegate:delegate userInfo:userInfo];	
 }
 
 #pragma mark Cliques
 
-- (void)retrieveCliquesWithDelegate:(id)delegate
+- (void)retrieveCliquesWithDelegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
-	[self addRequestWithAction:OPRetrieveCliquesAction arguments:nil delegate:delegate];
+	[self addRequestWithAction:OPRetrieveCliquesAction arguments:nil delegate:delegate userInfo:userInfo];
 }
 
-- (void)createNewCliqueWithName:(NSString *)cliqueName delegate:(id)delegate
-{
-	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:cliqueName, @"clique_name", nil];
-	[self addRequestWithAction:OPCreateNewCliqueAction arguments:args delegate:delegate];
-}
-
-- (void)retrieveCliqueWithName:(NSString *)cliqueName delegate:(id)delegate
+- (void)createNewCliqueWithName:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:cliqueName, @"clique_name", nil];
-	[self addRequestWithAction:OPRetrieveCliqueAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPCreateNewCliqueAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)renameCliqueWithOldName:(NSString *)oldName newName:(NSString *)newName delegate:(id)delegate
+- (void)retrieveCliqueWithName:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
+{
+	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:cliqueName, @"clique_name", nil];
+	[self addRequestWithAction:OPRetrieveCliqueAction arguments:args delegate:delegate userInfo:userInfo];
+}
+
+- (void)renameCliqueWithOldName:(NSString *)oldName newName:(NSString *)newName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:oldName, @"clique_name", newName, @"new_name", nil];
-	[self addRequestWithAction:OPRenameCliqueAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPRenameCliqueAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)deleteCliqueWithName:(NSString *)cliqueName delegate:(id)delegate
+- (void)deleteCliqueWithName:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:cliqueName, @"clique_name", nil];
-	[self addRequestWithAction:OPDeleteCliqueAction arguments:args delegate:delegate];
+	[self addRequestWithAction:OPDeleteCliqueAction arguments:args delegate:delegate userInfo:userInfo];
 }
 
-- (void)addUser:(NSString *)userIdentifier toClique:(NSString *)cliqueName delegate:(id)delegate
+- (void)addUser:(NSString *)userIdentifier toClique:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", cliqueName, @"clique_name", nil];
-	[self addRequestWithAction:OPAddUserToCliqueAction arguments:args delegate:delegate];	
+	[self addRequestWithAction:OPAddUserToCliqueAction arguments:args delegate:delegate userInfo:userInfo];	
 }
 
-- (void)removeUser:(NSString *)userIdentifier fromClique:(NSString *)cliqueName delegate:(id)delegate
+- (void)removeUser:(NSString *)userIdentifier fromClique:(NSString *)cliqueName delegate:(id)delegate userInfo:(NSDictionary *)userInfo
 {
 	if ([userIdentifier isKindOfClass:[NSNumber class]]) {
 		userIdentifier = [(NSNumber *)userIdentifier stringValue];
 	}
 	NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:userIdentifier, @"user_id", cliqueName, @"clique_name", nil];
-	[self addRequestWithAction:OPRemoveUserFromCliqueAction arguments:args delegate:delegate];		
+	[self addRequestWithAction:OPRemoveUserFromCliqueAction arguments:args delegate:delegate userInfo:userInfo];		
 	
 }
 

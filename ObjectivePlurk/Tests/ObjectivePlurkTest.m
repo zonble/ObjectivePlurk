@@ -39,15 +39,18 @@ NS_INLINE NSString *GenerateUUIDString()
 	[ObjectivePlurk sharedInstance].shouldWaitUntilDone = YES;
 	
 	// Users
-	[[ObjectivePlurk sharedInstance] loginWithUsername:ACCOUNT password:PASSWD delegate:self];
+	[[ObjectivePlurk sharedInstance] loginWithUsername:ACCOUNT password:PASSWD delegate:self userInfo:nil];
 	
-	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"ObjectivePlurk Test" newPassword:nil email:@"example@exmaple.com" displayName:@"for unittest" privacy:OPPrivacyOnlyFriends dateOfBirth:nil delegate:self];
-	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"Objective Plurk" newPassword:nil email:@"objplurk@zonble.net" displayName:@"Objective Plurk" privacy:OPPrivacyWorld dateOfBirth:nil delegate:self];
+	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"ObjectivePlurk Test" newPassword:nil email:@"example@exmaple.com" displayName:@"for unittest" privacy:OPPrivacyOnlyFriends dateOfBirth:nil delegate:self userInfo:nil];
+	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"Objective Plurk" newPassword:nil email:@"objplurk@zonble.net" displayName:@"Objective Plurk" privacy:OPPrivacyWorld dateOfBirth:nil delegate:self userInfo:nil];
 	
-	[[ObjectivePlurk sharedInstance] retrievePollingMessagesWithDateOffset:[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 *3] delegate:self];
+	[[ObjectivePlurk sharedInstance] retrievePollingMessagesWithDateOffset:[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 *3] delegate:self userInfo:nil];
 	
-	[[ObjectivePlurk sharedInstance] addNewMessageWithContent:[NSString stringWithFormat:@"Unittest - new: %@", GenerateUUIDString()] qualifier:@":" othersCanComment:YES lang:@"en" limitToUsers:nil delegate:self];
-	[[ObjectivePlurk sharedInstance] retrieveMessagesWithDateOffset:nil limit:0 user:[currentUserInfo valueForKey:@"uid"] isResponded:NO isPrivate:NO delegate:self];
+	[[ObjectivePlurk sharedInstance] addNewMessageWithContent:[NSString stringWithFormat:@"Unittest - new: %@", GenerateUUIDString()] qualifier:@":" othersCanComment:YES lang:@"en" limitToUsers:nil delegate:self userInfo:nil];
+	[[ObjectivePlurk sharedInstance] retrieveMessagesWithDateOffset:nil limit:0 user:[currentUserInfo valueForKey:@"uid"] isResponded:NO isPrivate:NO delegate:self userInfo:nil];
+	
+	[[ObjectivePlurk sharedInstance] retrieveMyProfileWithDelegate:self userInfo:nil];
+	[[ObjectivePlurk sharedInstance] retrieveFriendsCompletionList:self userInfo:nil];
 
 }
 
@@ -210,13 +213,19 @@ NS_INLINE NSString *GenerateUUIDString()
 	}
 	if ([messages count]) {
 		NSDictionary *firstMessage = [messages objectAtIndex:0];
-		[plurk retrieveMessageWithMessageIdentifier:[firstMessage valueForKey:@"plurk_id"] delegate:self];
+		[plurk retrieveMessageWithMessageIdentifier:[firstMessage valueForKey:@"plurk_id"] delegate:self userInfo:nil];
 	}
 	NSArray *messageIDs = [messages valueForKeyPath:@"plurk_id"];
 	
-	[plurk muteMessagesWithMessageIdentifiers:messageIDs delegate:self];
-	[plurk unmuteMessagesWithMessageIdentifiers:messageIDs delegate:self];
-	[plurk markMessagesAsReadWithMessageIdentifiers:messageIDs delegate:self];
+	[plurk muteMessagesWithMessageIdentifiers:messageIDs delegate:self userInfo:nil];
+	[plurk unmuteMessagesWithMessageIdentifiers:messageIDs delegate:self userInfo:nil];
+	[plurk markMessagesAsReadWithMessageIdentifiers:messageIDs delegate:self userInfo:nil];
+
+	if ([messages count]) {
+		NSDictionary *lastMessage = [messages lastObject];
+		[plurk deleteMessageWithMessageIdentifier:[lastMessage valueForKey:@"plurk_id"] delegate:self userInfo:nil];
+	}
+	
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingMessages:(NSError *)error
 {
@@ -263,9 +272,21 @@ NS_INLINE NSString *GenerateUUIDString()
 {
 //	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
 	[self _validateMessage:result];
-	[plurk editMessageWithMessageIdentifier:[result valueForKey:@"plurk_id"] content:[NSString stringWithFormat:@"Unittest - edit: %@", GenerateUUIDString()] delegate:self];
+	[plurk editMessageWithMessageIdentifier:[result valueForKey:@"plurk_id"] content:[NSString stringWithFormat:@"Unittest - edit: %@", GenerateUUIDString()] delegate:self userInfo:nil];
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailAddingMessage:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didDeleteMessage:(NSDictionary *)result
+{
+//	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
+	NSString *successText = [result valueForKey:@"success_text"];
+	STAssertNotNil(successText, @"success_text should exist.");		
+	STAssertTrue([successText isEqualToString:@"ok"], @"success_text should be 'ok'.");		
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailDeletingMessage:(NSError *)error
 {
 	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
 }
@@ -275,9 +296,9 @@ NS_INLINE NSString *GenerateUUIDString()
 //	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
 	[self _validateMessage:result];
 	for (NSInteger i = 0; i < 5; i++) {
-		[plurk addNewResponseWithContent:[NSString stringWithFormat:@"Unittest - response: %@", GenerateUUIDString()] qualifier:@":" toMessages:[result valueForKey:@"plurk_id"] delegate:self];
+		[plurk addNewResponseWithContent:[NSString stringWithFormat:@"Unittest - response: %@", GenerateUUIDString()] qualifier:@":" toMessages:[result valueForKey:@"plurk_id"] delegate:self userInfo:nil];
 	}
-	[plurk retrieveResponsesWithMessageIdentifier:[result valueForKey:@"plurk_id"] delegate:self];
+	[plurk retrieveResponsesWithMessageIdentifier:[result valueForKey:@"plurk_id"] delegate:self userInfo:nil];
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailEditingMessage:(NSError *)error
 {
@@ -295,7 +316,7 @@ NS_INLINE NSString *GenerateUUIDString()
 	}
 	if ([responses count]) {
 		NSDictionary *response = [responses objectAtIndex:0];
-		[plurk deleteResponseWithMessageIdentifier:[response valueForKey:@"plurk_id"] responseIdentifier:[response valueForKey:@"id"] delegate:self];
+		[plurk deleteResponseWithMessageIdentifier:[response valueForKey:@"plurk_id"] responseIdentifier:[response valueForKey:@"id"] delegate:self userInfo:nil];
 	}
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingResponses:(NSError *)error
@@ -321,6 +342,41 @@ NS_INLINE NSString *GenerateUUIDString()
 	STAssertTrue([successText isEqualToString:@"ok"], @"success_text should be 'ok'.");		
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailDeletingResponse:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+#pragma mark Profiles
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrieveMyProfile:(NSDictionary *)result
+{
+	NSArray *messages = [result valueForKey:@"plurks"];
+	STAssertNotNil(messages, @"There should be messages after loggin in.");
+	for (NSDictionary *message in messages) {
+		[self _validateMessage:message];
+	}
+	NSDictionary *users = [result valueForKey:@"plurks_users"];
+	STAssertNotNil(users, @"There should be a user list after loggin in.");
+	for (NSString *key in [users allKeys]) {
+		NSDictionary *user = [users valueForKey:key];
+		[self _validateUser:user];
+	}	
+	
+	NSDictionary *userInfo = [result valueForKey:@"user_info"];
+	STAssertNotNil(userInfo, @"There should be  after loggin in.");
+	[self _validateUserInfo:userInfo];	
+	currentUserInfo = [userInfo retain];
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingMyProfile:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrievePublicProfile:(NSDictionary *)result
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingPublicProfile:(NSError *)error
 {
 	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
 }
