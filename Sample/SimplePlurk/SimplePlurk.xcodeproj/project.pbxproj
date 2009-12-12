@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* SimplePlurkAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* SimplePlurkAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		D48B5BEE10D3811600434553 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48B5BED10D3811600434553 /* SystemConfiguration.framework */; };
+		D48B5C0510D3813400434553 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48B5C0410D3813400434553 /* CFNetwork.framework */; };
+		D48B5C1A10D3817D00434553 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48B5C1910D3817D00434553 /* MobileCoreServices.framework */; };
+		D48B5C6910D381CE00434553 /* LoginTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5C6810D381CE00434553 /* LoginTableViewController.m */; };
+		D48B5E1910D38AD400434553 /* ObjectivePlurk.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E0210D38AD400434553 /* ObjectivePlurk.m */; };
+		D48B5E1A10D38AD400434553 /* ObjectivePlurk+PrivateMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E0410D38AD400434553 /* ObjectivePlurk+PrivateMethods.m */; };
+		D48B5E1B10D38AD400434553 /* BSJSONEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E0810D38AD400434553 /* BSJSONEncoder.m */; };
+		D48B5E1C10D38AD400434553 /* NSArray+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E0A10D38AD400434553 /* NSArray+BSJSONAdditions.m */; };
+		D48B5E1D10D38AD400434553 /* NSDictionary+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E0C10D38AD400434553 /* NSDictionary+BSJSONAdditions.m */; };
+		D48B5E1E10D38AD400434553 /* NSScanner+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E0E10D38AD400434553 /* NSScanner+BSJSONAdditions.m */; };
+		D48B5E1F10D38AD400434553 /* NSString+BSJSONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E1010D38AD400434553 /* NSString+BSJSONAdditions.m */; };
+		D48B5E2010D38AD400434553 /* LFHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E1310D38AD400434553 /* LFHTTPRequest.m */; };
+		D48B5E2110D38AD400434553 /* LFSiteReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E1510D38AD400434553 /* LFSiteReachability.m */; };
+		D48B5E2210D38AD400434553 /* NSData+LFHTTPFormExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D48B5E1810D38AD400434553 /* NSData+LFHTTPFormExtensions.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* SimplePlurkAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlurkAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* SimplePlurkAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePlurkAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* SimplePlurk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplePlurk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AAE50D9B0CCF005BE974 /* SimplePlurk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePlurk_Prefix.pch; sourceTree = "<group>"; };
+		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* SimplePlurk-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SimplePlurk-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D48B5BEA10D380F500434553 /* PlurkAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlurkAPIKey.h; path = ../../ObjectivePlurk/PlurkAPIKey.h; sourceTree = SOURCE_ROOT; };
+		D48B5BED10D3811600434553 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D48B5C0410D3813400434553 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D48B5C1910D3817D00434553 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D48B5C6710D381CE00434553 /* LoginTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewController.h; sourceTree = "<group>"; };
+		D48B5C6810D381CE00434553 /* LoginTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewController.m; sourceTree = "<group>"; };
+		D48B5E0110D38AD400434553 /* ObjectivePlurk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectivePlurk.h; path = ../../ObjectivePlurk/ObjectivePlurk.h; sourceTree = SOURCE_ROOT; };
+		D48B5E0210D38AD400434553 /* ObjectivePlurk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectivePlurk.m; path = ../../ObjectivePlurk/ObjectivePlurk.m; sourceTree = SOURCE_ROOT; };
+		D48B5E0310D38AD400434553 /* ObjectivePlurk+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ObjectivePlurk+PrivateMethods.h"; path = "../../ObjectivePlurk/ObjectivePlurk+PrivateMethods.h"; sourceTree = SOURCE_ROOT; };
+		D48B5E0410D38AD400434553 /* ObjectivePlurk+PrivateMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ObjectivePlurk+PrivateMethods.m"; path = "../../ObjectivePlurk/ObjectivePlurk+PrivateMethods.m"; sourceTree = SOURCE_ROOT; };
+		D48B5E0710D38AD400434553 /* BSJSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSJSONEncoder.h; path = ../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/BSJSONEncoder.h; sourceTree = SOURCE_ROOT; };
+		D48B5E0810D38AD400434553 /* BSJSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSJSONEncoder.m; path = ../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/BSJSONEncoder.m; sourceTree = SOURCE_ROOT; };
+		D48B5E0910D38AD400434553 /* NSArray+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+BSJSONAdditions.h"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSArray+BSJSONAdditions.h"; sourceTree = SOURCE_ROOT; };
+		D48B5E0A10D38AD400434553 /* NSArray+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+BSJSONAdditions.m"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSArray+BSJSONAdditions.m"; sourceTree = SOURCE_ROOT; };
+		D48B5E0B10D38AD400434553 /* NSDictionary+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+BSJSONAdditions.h"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSDictionary+BSJSONAdditions.h"; sourceTree = SOURCE_ROOT; };
+		D48B5E0C10D38AD400434553 /* NSDictionary+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+BSJSONAdditions.m"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSDictionary+BSJSONAdditions.m"; sourceTree = SOURCE_ROOT; };
+		D48B5E0D10D38AD400434553 /* NSScanner+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSScanner+BSJSONAdditions.h"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSScanner+BSJSONAdditions.h"; sourceTree = SOURCE_ROOT; };
+		D48B5E0E10D38AD400434553 /* NSScanner+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSScanner+BSJSONAdditions.m"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSScanner+BSJSONAdditions.m"; sourceTree = SOURCE_ROOT; };
+		D48B5E0F10D38AD400434553 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+BSJSONAdditions.h"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSString+BSJSONAdditions.h"; sourceTree = SOURCE_ROOT; };
+		D48B5E1010D38AD400434553 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+BSJSONAdditions.m"; path = "../../ObjectivePlurk/ExternalLibraries/bsjsonadditions/NSString+BSJSONAdditions.m"; sourceTree = SOURCE_ROOT; };
+		D48B5E1210D38AD400434553 /* LFHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFHTTPRequest.h; path = ../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/LFHTTPRequest.h; sourceTree = SOURCE_ROOT; };
+		D48B5E1310D38AD400434553 /* LFHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFHTTPRequest.m; path = ../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/LFHTTPRequest.m; sourceTree = SOURCE_ROOT; };
+		D48B5E1410D38AD400434553 /* LFSiteReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFSiteReachability.h; path = ../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/LFSiteReachability.h; sourceTree = SOURCE_ROOT; };
+		D48B5E1510D38AD400434553 /* LFSiteReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFSiteReachability.m; path = ../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/LFSiteReachability.m; sourceTree = SOURCE_ROOT; };
+		D48B5E1610D38AD400434553 /* LFWebAPIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFWebAPIKit.h; path = ../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/LFWebAPIKit.h; sourceTree = SOURCE_ROOT; };
+		D48B5E1710D38AD400434553 /* NSData+LFHTTPFormExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+LFHTTPFormExtensions.h"; path = "../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/NSData+LFHTTPFormExtensions.h"; sourceTree = SOURCE_ROOT; };
+		D48B5E1810D38AD400434553 /* NSData+LFHTTPFormExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+LFHTTPFormExtensions.m"; path = "../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit/NSData+LFHTTPFormExtensions.m"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				D48B5BEE10D3811600434553 /* SystemConfiguration.framework in Frameworks */,
+				D48B5C0510D3813400434553 /* CFNetwork.framework in Frameworks */,
+				D48B5C1A10D3817D00434553 /* MobileCoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5BEA10D380F500434553 /* PlurkAPIKey.h */,
+				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
+				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				1D3623240D0F684500981E51 /* SimplePlurkAppDelegate.h */,
+				1D3623250D0F684500981E51 /* SimplePlurkAppDelegate.m */,
+				D48B5C6710D381CE00434553 /* LoginTableViewController.h */,
+				D48B5C6810D381CE00434553 /* LoginTableViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* SimplePlurk.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5DFF10D38AC200434553 /* ObjectivePlurk */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* SimplePlurk_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* SimplePlurk-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5C0410D3813400434553 /* CFNetwork.framework */,
+				D48B5C1910D3817D00434553 /* MobileCoreServices.framework */,
+				D48B5BED10D3811600434553 /* SystemConfiguration.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D48B5DFF10D38AC200434553 /* ObjectivePlurk */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5E0510D38AD400434553 /* ExternalLibraries */,
+				D48B5E0010D38AD400434553 /* Classes */,
+			);
+			name = ObjectivePlurk;
+			sourceTree = "<group>";
+		};
+		D48B5E0010D38AD400434553 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5E0110D38AD400434553 /* ObjectivePlurk.h */,
+				D48B5E0210D38AD400434553 /* ObjectivePlurk.m */,
+				D48B5E0310D38AD400434553 /* ObjectivePlurk+PrivateMethods.h */,
+				D48B5E0410D38AD400434553 /* ObjectivePlurk+PrivateMethods.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		D48B5E0510D38AD400434553 /* ExternalLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5E1110D38AD400434553 /* LFWebAPIKit */,
+				D48B5E0610D38AD400434553 /* bsjsonadditions */,
+			);
+			name = ExternalLibraries;
+			sourceTree = "<group>";
+		};
+		D48B5E0610D38AD400434553 /* bsjsonadditions */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5E0710D38AD400434553 /* BSJSONEncoder.h */,
+				D48B5E0810D38AD400434553 /* BSJSONEncoder.m */,
+				D48B5E0910D38AD400434553 /* NSArray+BSJSONAdditions.h */,
+				D48B5E0A10D38AD400434553 /* NSArray+BSJSONAdditions.m */,
+				D48B5E0B10D38AD400434553 /* NSDictionary+BSJSONAdditions.h */,
+				D48B5E0C10D38AD400434553 /* NSDictionary+BSJSONAdditions.m */,
+				D48B5E0D10D38AD400434553 /* NSScanner+BSJSONAdditions.h */,
+				D48B5E0E10D38AD400434553 /* NSScanner+BSJSONAdditions.m */,
+				D48B5E0F10D38AD400434553 /* NSString+BSJSONAdditions.h */,
+				D48B5E1010D38AD400434553 /* NSString+BSJSONAdditions.m */,
+			);
+			name = bsjsonadditions;
+			sourceTree = "<group>";
+		};
+		D48B5E1110D38AD400434553 /* LFWebAPIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D48B5E1210D38AD400434553 /* LFHTTPRequest.h */,
+				D48B5E1310D38AD400434553 /* LFHTTPRequest.m */,
+				D48B5E1410D38AD400434553 /* LFSiteReachability.h */,
+				D48B5E1510D38AD400434553 /* LFSiteReachability.m */,
+				D48B5E1610D38AD400434553 /* LFWebAPIKit.h */,
+				D48B5E1710D38AD400434553 /* NSData+LFHTTPFormExtensions.h */,
+				D48B5E1810D38AD400434553 /* NSData+LFHTTPFormExtensions.m */,
+			);
+			name = LFWebAPIKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* SimplePlurk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "SimplePlurk" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplePlurk;
+			productName = SimplePlurk;
+			productReference = 1D6058910D05DD3D006BFB54 /* SimplePlurk.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SimplePlurk" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* SimplePlurk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* SimplePlurkAppDelegate.m in Sources */,
+				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
+				D48B5C6910D381CE00434553 /* LoginTableViewController.m in Sources */,
+				D48B5E1910D38AD400434553 /* ObjectivePlurk.m in Sources */,
+				D48B5E1A10D38AD400434553 /* ObjectivePlurk+PrivateMethods.m in Sources */,
+				D48B5E1B10D38AD400434553 /* BSJSONEncoder.m in Sources */,
+				D48B5E1C10D38AD400434553 /* NSArray+BSJSONAdditions.m in Sources */,
+				D48B5E1D10D38AD400434553 /* NSDictionary+BSJSONAdditions.m in Sources */,
+				D48B5E1E10D38AD400434553 /* NSScanner+BSJSONAdditions.m in Sources */,
+				D48B5E1F10D38AD400434553 /* NSString+BSJSONAdditions.m in Sources */,
+				D48B5E2010D38AD400434553 /* LFHTTPRequest.m in Sources */,
+				D48B5E2110D38AD400434553 /* LFSiteReachability.m in Sources */,
+				D48B5E2210D38AD400434553 /* NSData+LFHTTPFormExtensions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SimplePlurk_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					../../ObjectivePlurk,
+					../../ObjectivePlurk/ExternalLibraries/bsjsonadditions,
+					../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit,
+				);
+				INFOPLIST_FILE = "SimplePlurk-Info.plist";
+				PRODUCT_NAME = SimplePlurk;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SimplePlurk_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					../../ObjectivePlurk,
+					../../ObjectivePlurk/ExternalLibraries/bsjsonadditions,
+					../../ObjectivePlurk/ExternalLibraries/LFWebAPIKit,
+				);
+				INFOPLIST_FILE = "SimplePlurk-Info.plist";
+				PRODUCT_NAME = SimplePlurk;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "SimplePlurk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SimplePlurk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
