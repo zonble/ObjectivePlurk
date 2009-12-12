@@ -17,4 +17,6 @@
 
 - (void)testAPI;
 
+@property (retain) NSDictionary *currentUserInfo;
+
 @end

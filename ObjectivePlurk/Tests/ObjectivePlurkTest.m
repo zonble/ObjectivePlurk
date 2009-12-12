@@ -138,8 +138,8 @@ NS_INLINE NSString *GenerateUUIDString()
 	
 	NSDictionary *userInfo = [result valueForKey:@"user_info"];
 	STAssertNotNil(userInfo, @"There should be  after loggin in.");
-	[self _validateUserInfo:userInfo];	
-	currentUserInfo = [userInfo retain];
+	[self _validateUserInfo:userInfo];
+	self.currentUserInfo = userInfo;
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailLoggingIn:(NSError *)error
 {
@@ -365,7 +365,7 @@ NS_INLINE NSString *GenerateUUIDString()
 	NSDictionary *userInfo = [result valueForKey:@"user_info"];
 	STAssertNotNil(userInfo, @"There should be  after loggin in.");
 	[self _validateUserInfo:userInfo];	
-	currentUserInfo = [userInfo retain];
+	self.currentUserInfo = userInfo;
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingMyProfile:(NSError *)error
 {
@@ -381,8 +381,73 @@ NS_INLINE NSString *GenerateUUIDString()
 	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
 }
 
+#pragma mark Friends and fans
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrieveFriends:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingFriends:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrieveFans:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingFans:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrieveFollowingUsers:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingFollowingUsers:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didBecomeFriend:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailBecomingFriend:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didRemoveFriendship:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRemovingFriendship:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didBecomeFan:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailBecomingFan:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didSetFollowingUser:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailSettingFollowingUser:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
+- (void)plurk:(ObjectivePlurk *)plurk didRetrieveFriendsCompletionList:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailRetrievingFriendsCompletionList:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
 
 
-
+@synthesize currentUserInfo;
 
 @end

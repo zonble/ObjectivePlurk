@@ -72,7 +72,6 @@
 		D4FFA0B110D0383E00D10A53 /* NSString+BSJSONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+BSJSONAdditions.h"; path = "ExternalLibraries/bsjsonadditions/NSString+BSJSONAdditions.h"; sourceTree = "<group>"; };
 		D4FFA0B210D0383E00D10A53 /* NSString+BSJSONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+BSJSONAdditions.m"; path = "ExternalLibraries/bsjsonadditions/NSString+BSJSONAdditions.m"; sourceTree = "<group>"; };
 		D4FFA0C010D0385400D10A53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D4FFA1DE10D0416800D10A53 /* ObjectivePlurkTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectivePlurkTest-Info.plist"; sourceTree = "<group>"; };
 		D4FFA20410D042B100D10A53 /* PlurkAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlurkAPIKey.h; sourceTree = "<group>"; };
 		D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectivePlurkTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4FFA27910D0457600D10A53 /* ObjectivePlurkTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectivePlurkTest.h; path = Tests/ObjectivePlurkTest.h; sourceTree = "<group>"; };
@@ -119,7 +118,6 @@
 				089C1665FE841158C02AAC07 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
-				D4FFA1DE10D0416800D10A53 /* ObjectivePlurkTest-Info.plist */,
 			);
 			name = ObjectivePlurk;
 			sourceTree = "<group>";
@@ -454,7 +452,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "ObjectivePlurkTest-Info.plist";
+				INFOPLIST_FILE = "Tests/ObjectivePlurkTest-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -480,7 +478,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "ObjectivePlurkTest-Info.plist";
+				INFOPLIST_FILE = "Tests/ObjectivePlurkTest-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -490,6 +488,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = ObjectivePlurkTest;
+				SDKROOT = macosx10.5;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
 			};
