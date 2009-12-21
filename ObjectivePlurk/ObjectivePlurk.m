@@ -52,11 +52,13 @@ static ObjectivePlurk *sharedInstance;
 	[_request cancelWithoutDelegateMessage];
 	[_request release];
 	_request = nil;
+	[APIKey release];
 	[_queue release];
 	[_currentUserInfo release];
 	[_qualifiers release];
 	[_langCodes release];
 	[_dateFormatter release];
+	[_expirationDate release];
 	[super dealloc];
 }
 
@@ -123,6 +125,28 @@ static ObjectivePlurk *sharedInstance;
 		return YES;
 	}
 	return NO;
+}
+- (BOOL)resume
+{
+	NSString *cookie = [[NSUserDefaults standardUserDefaults] stringForKey:ObjectivePlurkCookiePreferenceName];
+	if (!cookie) {
+		return NO;
+	}
+	NSDate *date = [self _expirationDateFromCookieString:cookie];
+	if (!date) {
+		return NO;
+	}
+	if ([date compare:[NSDate date]] != NSOrderedDescending) {
+		return NO;
+	}
+	
+	id tmp = _expirationDate;
+	_expirationDate = [date retain];
+	[tmp release];	
+	
+	NSDictionary *requestHeader = [NSDictionary dictionaryWithObjectsAndKeys:cookie, @"Cookie", nil];
+	_request.requestHeader = requestHeader;
+	return YES;
 }
 
 - (void)logout
@@ -635,5 +659,6 @@ static ObjectivePlurk *sharedInstance;
 @synthesize qualifiers = _qualifiers;
 @synthesize langCodes = _langCodes;
 @synthesize currentUserInfo = _currentUserInfo;
+@synthesize expirationDate = _expirationDate;
 
 @end

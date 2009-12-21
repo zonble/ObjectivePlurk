@@ -31,6 +31,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "ObjectivePlurk+PrivateMethods.h"
 
+NSString *const ObjectivePlurkCookiePreferenceName = @"ObjectivePlurkCookiePreferenceName";
+
 NSString *const ObjectivePlurkAPIURLString = @"https://www.plurk.com";
 NSString *const ObjectivePlurkErrorDomain = @"ObjectivePlurkErrorDomain";
 NSString *const ObjectivePlurkUploadTempFilenamePrefix = @"ObjectivePlurk";
@@ -271,13 +273,20 @@ NSString *mimeTypeForExtension(NSString *ext)
 	NSString *URLString = [ObjectivePlurkAPIURLString stringByAppendingString:actionName];
 	URLString = [URLString stringByAppendingString:[self GETStringFromDictionary:arguments]];
 	NSURL *URL = [NSURL URLWithString:URLString];
-	//	NSDictionary *sessionInfo = [NSDictionary dictionaryWithObjectsAndKeys:actionName, @"actionName", URL, @"URL", delegate, @"delegate", arguments, @"arguments", nil];
 	NSMutableDictionary *sessionInfo = [NSMutableDictionary dictionary];
 	[sessionInfo setObject:actionName forKey:@"actionName"];
 	[sessionInfo setObject:URL forKey:@"URL"];
 	if (delegate) [sessionInfo setObject:delegate forKey:@"delegate"];
 	if (arguments) [sessionInfo setObject:arguments forKey:@"arguments"];
 	if (userInfo) [sessionInfo setObject:userInfo forKey:@"userInfo"];
+	
+	if (![actionName isEqualToString:OPLoginAction]) {
+		if ([_expirationDate compare:[NSDate date]] != NSOrderedDescending) {
+			[_request setSessionInfo:sessionInfo];
+			[self httpRequest:_request didFailWithError:@"Session expired."];
+		}		
+	}	
+	
 	
 	if (filepath) {
 		[_request cancelWithoutDelegateMessage];
@@ -302,9 +311,29 @@ NSString *mimeTypeForExtension(NSString *ext)
 	[self addRequestWithAction:actionName arguments:arguments filepath:nil multipartName:nil delegate:delegate userInfo:userInfo];
 }
 
+- (NSDate *)_expirationDateFromCookieString:(NSString *)cookie
+{
+	if (![cookie length]) {
+		return nil;
+	}
+	NSRange range = [cookie rangeOfString:@"expires="];		
+	NSUInteger dateStringStart = range.location;
+	if (dateStringStart == NSNotFound) {
+		return nil;
+	}
+	NSString *dateString = [cookie substringFromIndex:dateStringStart + range.length];
+	NSUInteger dateStringEnd = [dateString rangeOfString:@";"].location;
+	dateString = [dateString substringToIndex:dateStringEnd];
+	NSDateFormatter *cookieExpireDateFormatter = [[NSDateFormatter alloc] init];
+	[cookieExpireDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	[cookieExpireDateFormatter setDateFormat:@"EEE, dd-MMM-yyyy HH:mm:ss zzz"];
+	NSDate *date = [cookieExpireDateFormatter dateFromString:dateString];
+	[cookieExpireDateFormatter release];
+	return date;
+}
+
 - (void)loginDidSuccess:(LFHTTPRequest *)request
 {
-//	NSDictionary *result = [sessionInfo valueForKey:@"result"];
 	NSString *s = [[[NSString alloc] initWithData:[request receivedData] encoding:NSUTF8StringEncoding] autorelease];
 	NSDictionary *result = [NSDictionary dictionaryWithJSONString:s];
 	NSDictionary *sessionInfo = [request sessionInfo];
@@ -320,6 +349,12 @@ NSString *mimeTypeForExtension(NSString *ext)
 
 	NSDictionary *header = [request receivedHeader];
 	NSString *cookie = [header valueForKey:@"Set-Cookie"];
+	NSDate *date = [self _expirationDateFromCookieString:cookie];
+	id tmp = _expirationDate;
+	_expirationDate = [date retain];
+	[tmp release];
+	[[NSUserDefaults standardUserDefaults] setObject:cookie forKey:ObjectivePlurkCookiePreferenceName];
+	
 	NSDictionary *requestHeader = [NSDictionary dictionaryWithObjectsAndKeys:cookie, @"Cookie", nil];
 	_request.requestHeader = requestHeader;
 
@@ -596,9 +631,6 @@ NSString *mimeTypeForExtension(NSString *ext)
 			[delegate plurk:self didRemoveUserFromClique:result];
 		}
 	}
-
-
-
 }
 
 - (void)commonAPIDidFail:(NSError *)error
@@ -850,7 +882,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 
 - (void)httpRequest:(LFHTTPRequest *)request didReceiveStatusCode:(NSUInteger)statusCode URL:(NSURL *)url responseHeader:(CFHTTPMessageRef)header
 {
-	NSLog(@"%d", statusCode);
+//	NSLog(@"%d", statusCode);
 }
 
 - (void)httpRequestDidCancel:(LFHTTPRequest *)request

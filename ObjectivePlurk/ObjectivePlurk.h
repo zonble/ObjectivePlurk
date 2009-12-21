@@ -234,6 +234,8 @@ typedef enum {
 	OPOnlyFriendsCanComment = 2
 } OPCanComment;
 
+extern NSString *const ObjectivePlurkCookiePreferenceName;
+
 extern NSString *const ObjectivePlurkAPIURLString;
 extern NSString *const ObjectivePlurkErrorDomain;
 extern NSString *const ObjectivePlurkUploadTempFilenamePrefix;
@@ -314,12 +316,13 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 	NSDictionary *_langCodes;
 	NSDictionary *_currentUserInfo;
 	NSDateFormatter *_dateFormatter;
+	NSDate *_expirationDate;
 }
 
 + (ObjectivePlurk *)sharedInstance;
 - (void)cancelAllRequest;
 - (void)cancelAllRequestWithDelegate:(id)delegate;
-
+- (BOOL)resume;
 - (void)logout;
 
 - (NSString *)imageURLStringForUser:(id)identifier size:(OPUserProfileImageSize)size hasProfileImage:(BOOL)hasProfileImage avatar:(NSString *)avatar;
@@ -410,6 +413,7 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 @property (readonly) NSDictionary *langCodes;
 @property (readonly, getter=isLoggedIn) BOOL loggedIn;
 @property (copy, nonatomic) NSDictionary *currentUserInfo;
+@property (readonly) NSDate *expirationDate;
 @property (assign) BOOL shouldWaitUntilDone;
 
 @end
