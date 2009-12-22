@@ -40,6 +40,9 @@ NS_INLINE NSString *GenerateUUIDString()
 	// Users
 	[[ObjectivePlurk sharedInstance] loginWithUsername:ACCOUNT password:PASSWD delegate:self userInfo:nil];
 	
+	NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test" ofType:@"jpg"];
+	[[ObjectivePlurk sharedInstance] uploadPicture:imagePath delegate:self userInfo:nil];
+	
 	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"ObjectivePlurk Test" newPassword:nil email:@"example@exmaple.com" displayName:@"for unittest" privacy:OPPrivacyOnlyFriends dateOfBirth:nil delegate:self userInfo:nil];
 	[[ObjectivePlurk sharedInstance] updateProfileWithOldPassword:PASSWD fullname:@"Objective Plurk" newPassword:nil email:@"objplurk@zonble.net" displayName:@"Objective Plurk" privacy:OPPrivacyWorld dateOfBirth:nil delegate:self userInfo:nil];
 	
@@ -303,6 +306,15 @@ NS_INLINE NSString *GenerateUUIDString()
 {
 	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
 }
+
+- (void)plurk:(ObjectivePlurk *)plurk didUploadPicture:(NSDictionary *)result
+{
+}
+- (void)plurk:(ObjectivePlurk *)plurk didFailUploadingPicture:(NSError *)error
+{
+	STFail(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+}
+
 
 #pragma mark Responses
 

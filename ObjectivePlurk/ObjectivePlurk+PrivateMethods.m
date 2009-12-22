@@ -33,7 +33,7 @@
 
 NSString *const ObjectivePlurkCookiePreferenceName = @"ObjectivePlurkCookiePreferenceName";
 
-NSString *const ObjectivePlurkAPIURLString = @"https://www.plurk.com";
+NSString *const ObjectivePlurkAPIURLString = @"http://www.plurk.com";
 NSString *const ObjectivePlurkErrorDomain = @"ObjectivePlurkErrorDomain";
 NSString *const ObjectivePlurkUploadTempFilenamePrefix = @"ObjectivePlurk";
 
@@ -925,6 +925,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 		NSDictionary *result = [NSDictionary dictionaryWithJSONString:s];
 
 		if (!result) {
+			NSLog(@"%@", s);
 			[self httpRequest:request didFailWithError:@"Failed to parse contents"]; return;
 		}
 
