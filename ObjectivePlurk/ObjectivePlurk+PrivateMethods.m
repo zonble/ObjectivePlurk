@@ -158,84 +158,32 @@ NSString *mimeTypeForExtension(NSString *ext)
 	NSInputStream *sourceStream = [NSInputStream inputStreamWithFileAtPath:inPath];
 	NSAssert1(sourceStream, @"File not exists or cannot open stream: %@", inPath);
 
-	// build the multipart form
-    NSString *separator = GenerateUUIDString();
-    NSMutableString *multipartBegin = [NSMutableString string];
-    NSMutableString *multipartEnd = [NSMutableString string];
-
-	[multipartBegin appendFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", separator, @"api_key", APIKey];
-//	NSString *mimeType = mimeTypeForExtension([filename pathExtension]);
-
-    // add filename, if nil, generate a UUID
-    [multipartBegin appendFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", separator, multipartName, filename];
-//    [multipartBegin appendFormat:@"Content-Type: %@\r\n\r\n", mimeType];
-    [multipartBegin appendFormat:@"Content-Type: %@\r\n\r\n", @"application/octet-stream"];
-
-    [multipartEnd appendFormat:@"\r\n--%@--", separator];
+	NSString *boundary = @"---------------------------4ffac661b35420acd1bcceb11c1f610b";
+    NSMutableData *postData = [NSMutableData data];
     
-    // now we have everything, create a temp file for this purpose; although UUID is inferior to 
-	NSString *uploadTempFilename = [NSTemporaryDirectory() stringByAppendingFormat:@"%@.%@", ObjectivePlurkUploadTempFilenamePrefix, GenerateUUIDString()];
+    NSString *api_key = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"api_key\"\r\n\r\n%@", APIKey];
+    NSString *boundaryString = [NSString stringWithFormat:@"\r\n--%@\r\n", boundary];
+    NSString *boundaryStringFinal = [NSString stringWithFormat:@"\r\n--%@--\r\n", boundary];
+	
+    [postData appendData:[boundaryString dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[api_key dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[boundaryString dataUsingEncoding:NSUTF8StringEncoding]];
     
-	NSMutableDictionary *newSessionInfo = [NSMutableDictionary dictionaryWithDictionary:sessionInfo];
-	[newSessionInfo setObject:uploadTempFilename forKey:@"uploadTempFilename"];
-
-    // create the write stream
-    NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:uploadTempFilename append:NO];
-    [outputStream open];
-    
-    const char *UTF8String;
-    size_t writeLength;
-    UTF8String = [multipartBegin UTF8String];
-    writeLength = strlen(UTF8String);
-
-	size_t __unused actualWrittenLength;
-	actualWrittenLength = [outputStream write:(uint8_t *)UTF8String maxLength:writeLength];
-    NSAssert(actualWrittenLength == writeLength, @"Must write multipartBegin");
-
-    // open the input stream
-    const size_t bufferSize = 65536;
-    size_t readSize = 0;
-    uint8_t *buffer = (uint8_t *)calloc(1, bufferSize);
-    NSAssert(buffer, @"Must have enough memory for copy buffer");
-
-    [sourceStream open];
-    while ([sourceStream hasBytesAvailable]) {
-        if (!(readSize = [sourceStream read:buffer maxLength:bufferSize])) {
-            break;
-        }
-
-		size_t __unused actualWrittenLength;
-		actualWrittenLength = [outputStream write:buffer maxLength:readSize];
-        NSAssert (actualWrittenLength == readSize, @"Must completes the writing");
-    }
-    
-    [sourceStream close];
-    free(buffer);
-    
-    UTF8String = [multipartEnd UTF8String];
-    writeLength = strlen(UTF8String);
-	actualWrittenLength = [outputStream write:(uint8_t *)UTF8String maxLength:writeLength];
-    NSAssert(actualWrittenLength == writeLength, @"Must write multipartBegin");
-    [outputStream close];
-    
-    NSError *error = nil;
-    NSDictionary *fileInfo = [[NSFileManager defaultManager] attributesOfItemAtPath:uploadTempFilename error:&error];
-    NSAssert(fileInfo && !error, @"Must have upload temp file");
-    NSUInteger fileSize = [[fileInfo objectForKey:NSFileSize] unsignedIntegerValue];
-	    
-	NSLog(@"using file: %@", uploadTempFilename);
-
-    NSInputStream *inputStream = [NSInputStream inputStreamWithFileAtPath:uploadTempFilename];
-
+    [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", multipartName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+	NSString *mimeType = mimeTypeForExtension([filename pathExtension]);
+	[postData appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimeType] dataUsingEncoding:NSUTF8StringEncoding]];
+	NSData *photo = [NSData dataWithContentsOfFile:inPath];
+	[postData appendData:photo];    
+    [postData appendData:[boundaryStringFinal dataUsingEncoding:NSUTF8StringEncoding]];
+			
 	NSString *tempContentType = [[_request.contentType copy] autorelease];
-
-    NSString *multiPartContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", separator];
+	NSString *multiPartContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
 	_request.contentType = multiPartContentType;
-	_request.sessionInfo = newSessionInfo;
+	_request.sessionInfo = sessionInfo;
 
-	BOOL result = [_request performMethod:LFHTTPRequestPOSTMethod onURL:requestURL withInputStream:inputStream knownContentSize:fileSize];
+	BOOL result = [_request performMethod:LFHTTPRequestPOSTMethod onURL:requestURL withData:postData];
 	_request.contentType = tempContentType;
-
+	
 	return result;
 }
 
@@ -937,7 +885,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 }
 - (void)httpRequest:(LFHTTPRequest *)request sentBytes:(NSUInteger)bytesSent total:(NSUInteger)total
 {
-	NSLog(@"bytesSent/total:%d/%d", bytesSent, total);
+//	NSLog(@"bytesSent/total:%d/%d", bytesSent, total);
 }
 
 

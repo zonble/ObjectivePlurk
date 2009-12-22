@@ -274,7 +274,7 @@ NS_INLINE NSString *GenerateUUIDString()
 {
 //	STFail(@"%s %@", __PRETTY_FUNCTION__, [result description]);
 	[self _validateMessage:result];
-	[plurk editMessageWithMessageIdentifier:[result valueForKey:@"plurk_id"] content:[NSString stringWithFormat:@"Unittest - edit: %@", GenerateUUIDString()] delegate:self userInfo:nil];
+	[plurk editMessageWithMessageIdentifier:[result valueForKey:@"plurk_id"] content:[NSString stringWithFormat:@"Unittest - edit: %@", [result valueForKey:@"content_raw"]] delegate:self userInfo:nil];
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailAddingMessage:(NSError *)error
 {
@@ -309,6 +309,9 @@ NS_INLINE NSString *GenerateUUIDString()
 
 - (void)plurk:(ObjectivePlurk *)plurk didUploadPicture:(NSDictionary *)result
 {
+	STAssertNotNil([result valueForKey:@"full"], @"full should exist.");		
+	STAssertNotNil([result valueForKey:@"thumbnail"], @"thumbnail should exist.");		
+	[plurk addNewMessageWithContent:[NSString stringWithFormat:@"Unittest - new: %@ %@", [result valueForKey:@"full"], GenerateUUIDString()] qualifier:@":" othersCanComment:YES lang:@"en" limitToUsers:nil delegate:self userInfo:nil];
 }
 - (void)plurk:(ObjectivePlurk *)plurk didFailUploadingPicture:(NSError *)error
 {
