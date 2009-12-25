@@ -390,7 +390,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 		}
 	}
 	else if ([actionName isEqualToString:OPAddMessageAction]) {
-		if ([delegate respondsToSelector:@selector(plurk:didLoggedIn:)]) {
+		if ([delegate respondsToSelector:@selector(plurk:didAddMessage:)]) {
 			[delegate plurk:self didAddMessage:result];
 		}
 	}
