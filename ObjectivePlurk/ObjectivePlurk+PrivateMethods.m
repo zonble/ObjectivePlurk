@@ -197,7 +197,10 @@ NSString *mimeTypeForExtension(NSString *ext)
 		if ([key isEqual:[[d allKeys] objectAtIndex:0]]) {
 			[s setString:@"?"];
 		}
-		[s appendFormat:@"%@=%@", key, [[d valueForKey:key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		NSString *v = [d valueForKey:key];
+		v = [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		v = [v stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
+		[s appendFormat:@"%@=%@", key, v];
 		if (![key isEqual:[[d allKeys] lastObject]]) {
 			[s appendString:@"&"];
 		}
