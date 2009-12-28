@@ -153,6 +153,12 @@ static ObjectivePlurk *sharedInstance;
 {
 	_request.requestHeader = nil;
 	self.currentUserInfo = nil;
+
+	id tmp = _expirationDate;
+	_expirationDate = nil;
+	[tmp release];
+	
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:ObjectivePlurkCookiePreferenceName];
 }
 
 
