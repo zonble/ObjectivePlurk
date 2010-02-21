@@ -31,7 +31,9 @@
 #import "ObjectivePlurk.h"
 
 #if TARGET_OS_IPHONE
+	#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_0
 #import <MobileCoreServices/MobileCoreServices.h>
+	#endif
 #endif
 
 @interface ObjectivePlurk(PrivateMethods)
