@@ -31,7 +31,7 @@
 #import "ObjectivePlurk.h"
 
 #if TARGET_OS_IPHONE
-	#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_0
+	#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_2_2
 #import <MobileCoreServices/MobileCoreServices.h>
 	#endif
 #endif

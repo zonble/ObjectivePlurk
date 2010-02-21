@@ -118,12 +118,11 @@ NS_INLINE NSString *GenerateUUIDString()
 // http://developer.apple.com/macosx/uniformtypeidentifiers.html
 
 NSString *mimeTypeForExtension(NSString *ext)
-{
-    NSString* mimeType = nil;
-	
-#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_3_0
+{	
+#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED <= __IPHONE_2_2
 	return @"application/octet-stream";
 #else
+	NSString* mimeType = nil;
 
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef)ext, NULL);
     if (!UTI) return nil;
