@@ -68,7 +68,6 @@ static ObjectivePlurk *sharedInstance;
 	if (self != nil) {
 		_request = [[LFHTTPRequest alloc] init];
 		_request.delegate = self;
-//		_request.timeoutInterval = 60.0;
 		_queue = [[NSMutableArray alloc] init];
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -78,6 +77,103 @@ static ObjectivePlurk *sharedInstance;
 		_langCodes = [[NSDictionary alloc] initWithObjectsAndKeys:U8("English"), @"en", U8("Portugu"), @"pt_BR", U8("中文 (中国)"), @"cn", U8("Català"), @"ca", U8("Ελληνικά"), @"el", U8("Dansk"), @"dk", U8("Deutsch"), @"de", U8("Español"), @"es", U8("Svenska"), @"sv", U8("Norsk bokmål"), @"nb", U8("Hindi"), @"hi", U8("Română"), @"ro", U8("Hrvatski"), @"hr", U8("Français"), @"fr", U8("Pусский"), @"ru", U8("Italiano"), @"it", U8("日本語"), @"ja", U8("עברית"), @"he", U8("Magyar"), @"hu", U8("Nederlands"), @"ne", U8("ไทย"), @"th", U8("Filipino"), @"ta_fp", U8("Bahasa Indonesia"), @"in", U8("Polski"), @"pl", U8("العربية"), @"ar", U8("Finnish"), @"fi", U8("中文 (繁體中文)"), @"tr_ch", U8("Türkçe"), @"tr", U8("Gaeilge"), @"ga", U8("Slovensk"), @"sk", U8("українська"), @"uk", U8("فارسی"), @"fa", nil];
 	}
 	return self;
+}
+
+//- (NSArray *)qualifiers
+//{
+//	return _qualifiers;
+//}
+//- (NSArray *)langCodes
+//{
+//	return _langCodes;
+//}
+- (NSString *)langCodeFromLocalIdentifier:(NSString *)locale
+{
+	if ([locale isEqualToString:@"Dutch"] || [locale isEqualToString:@"nl"]) {
+		return @"ne";
+	}
+	if ([locale isEqualToString:@"English"] || [locale isEqualToString:@"en"]) {
+		return @"en";
+	}
+	if ([locale isEqualToString:@"French"] || [locale isEqualToString:@"fr"]) {
+		return @"fr";
+	}
+	if ([locale isEqualToString:@"German"] || [locale isEqualToString:@"de"]) {
+		return @"de";
+	}
+	if ([locale isEqualToString:@"Italian"] || [locale isEqualToString:@"it"]) {
+		return @"it";
+	}
+	if ([locale isEqualToString:@"Japanese"] || [locale isEqualToString:@"ja"]) {
+		return @"ja";
+	}
+	if ([locale isEqualToString:@"Spanish"] || [locale isEqualToString:@"es"]) {
+		return @"es";
+	}
+	if ([locale isEqualToString:@"da"]) {
+		return @"dk";
+	}
+	if ([locale isEqualToString:@"fi"]) {
+		return @"fi";
+	}
+	if ([locale isEqualToString:@"ko"]) {
+		return @"en"; //Korean, not supported.
+	}
+	if ([locale isEqualToString:@"no"] || [locale isEqualToString:@"nb"]) {
+		return @"nb";
+	}
+	if ([locale isEqualToString:@"pl"]) {
+		return @"pl";
+	}
+	if ([locale isEqualToString:@"pt"]) {
+		return @"pt_BR";
+	}
+	if ([locale isEqualToString:@"pt-PT"]) {
+		return @"pt_BR";
+	}
+	if ([locale isEqualToString:@"ru"]) {
+		return @"ru";
+	}	
+	if ([locale isEqualToString:@"sv"]) {
+		return @"sv";
+	}
+	if ([locale isEqualToString:@"zh-Hans"] || [locale isEqualToString:@"zh_CN"]) {
+		return @"cn";
+	}
+	if ([locale isEqualToString:@"zh-Hant"] || [locale isEqualToString:@"zh_TW"]) {
+		return @"tr_ch";
+	}
+	if ([locale isEqualToString:@"tr"]) {
+		return @"tr";
+	}
+	if ([locale isEqualToString:@"uk"]) {
+		return @"uk";
+	}
+	if ([locale isEqualToString:@"ar"]) {
+		return @"ar";
+	}
+	if ([locale isEqualToString:@"hr"]) {
+		return @"hr";
+	}
+	if ([locale isEqualToString:@"el"]) {
+		return @"el";
+	}
+	if ([locale isEqualToString:@"he"]) {
+		return @"he";
+	}
+	if ([locale isEqualToString:@"ro"]) {
+		return @"ro";
+	}
+	if ([locale isEqualToString:@"sk"]) {
+		return @"sk";
+	}
+	if ([locale isEqualToString:@"th"]) {
+		return @"th";
+	}	
+//	if ([locale isEqualToString:@"cs"]) {
+//		return @"cs";
+//	}
+	return @"en";
 }
 
 - (BOOL)shouldWaitUntilDone
