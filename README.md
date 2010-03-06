@@ -22,7 +22,7 @@ After adding a new NSObject subclass, the first thing you should do is to includ
 
 	#import "ObjectivePlurk.h"
 
-ObjectivePlurk has a singleton instance, it will be instantiated after the first time to call ``[ObjectivePlurk sharedInstance]``. The first thing to do with the shared instance, is to assign your API key to it. Without assigning an API key the library can do nothing at all. Select a proper place to do it after your application is initiated, implementing with the ``applicationDidFinishLaunching:`` delegate method of NSApplication or UIApplicaiton should be fine.
+ObjectivePlurk has a singleton instance, it will be instantiated after the first time to call ``[ObjectivePlurk sharedInstance]``. The first thing to do with the shared instance, is to assign your API key to it. Without assigning an API key the library can do nothing at all. Select a proper place to do it after your application is initiated, implementing with the ``applicationDidFinishLaunching:`` delegate method of ``NSApplication`` or ``UIApplicaiton`` should be fine.
 
 	[ObjectivePlurk sharedInstance].APIKey = @"MY API KEY";
 
@@ -34,7 +34,21 @@ Implement the following two delegate methods in your class. If you are successfu
 
 	- (void)plurk:(ObjectivePlurk *)plurk didLoggedIn:(NSDictionary *)result;
 	- (void)plurk:(ObjectivePlurk *)plurk didFailLoggingIn:(NSError *)error;
-	
+
+Then we can try read the timeline by calling ``retrieveMessagesWithDateOffset:limit:user:isResponded:isPrivate:delegate:userInfo:``, or do other things we would like to do.
+
+If you want to logout Plurk, just call ``logout``, and you can know if you are logged in by calling the ``loggedIn`` property.
+
+## Multiple API Calls
+
+You can call an instance of ObjectivePlurk to do more than one task simultaneously. The tasks will be scheduled into a queue, and they will be done one by one. You can cancel all tasks in the queue by calling the ``cancelAllRequest`` method. The design is not very efficient if you have a fast Internet connection, but it works on some limited devices such as iPhone.
+
+On the other hand, you may not want to cancel all the tasks but just part of them. You can cancel all the tasks assigned a specified delegate object by calling ``cancelAllRequestWithDelegate:``. The method should be useful when you want to release your delegate object and ask ObjectivePlurk not to send messages to it, in order to avoid bad access exceptions.
+
+
+## Contact
+
+Feel free to write me a message via GitHub's mail system, or write to zonble {at} gmail {dot} com. I can read and write English an Chinese.
 
 ## License
 
