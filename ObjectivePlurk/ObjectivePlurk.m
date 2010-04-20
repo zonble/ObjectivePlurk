@@ -71,6 +71,7 @@ static ObjectivePlurk *sharedInstance;
 		_queue = [[NSMutableArray alloc] init];
 		_dateFormatter = [[NSDateFormatter alloc] init];
 		[_dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+		[_dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
 		[_dateFormatter setDateFormat:@"yyyy-M-d'T'HH:mm:ss"];
 		_currentUserInfo = nil;
 		_qualifiers = [[NSArray alloc] initWithObjects:@"loves", @"likes", @"shares", @"gives", @"hates", @"wants", @"has", @"will", @"asks", @"wishes", @"was", @"feels", @"thinks", @"says", @"is", @":", @"freestyle", @"hopes", @"needs", @"wonders", nil];
