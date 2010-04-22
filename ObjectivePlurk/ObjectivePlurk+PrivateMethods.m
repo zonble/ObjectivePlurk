@@ -237,7 +237,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 	if (userInfo) [sessionInfo setObject:userInfo forKey:@"userInfo"];
 	
 	if (![actionName isEqualToString:OPLoginAction]) {
-		if ([_expirationDate && _expirationDate compare:[NSDate date]] != NSOrderedDescending) {
+		if (_expirationDate && [_expirationDate compare:[NSDate date]] != NSOrderedDescending) {
 			[_request setSessionInfo:sessionInfo];
 			[self httpRequest:_request didFailWithError:@"Session expired."];
 		}		
