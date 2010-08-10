@@ -22,7 +22,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D4FFA0F310D039C400D10A53 /* ObjectivePlurk.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D4FFA25B10D0451B00D10A53 /* ObjectivePlurkTest.octest */;
+			remoteGlobalIDString = D4FFA25B10D0451B00D10A53;
 			remoteInfo = ObjectivePlurkTest;
 		};
 		D4FFA0F710D039C400D10A53 /* PBXContainerItemProxy */ = {
