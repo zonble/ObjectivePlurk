@@ -118,8 +118,11 @@ NS_INLINE NSString *GenerateUUIDString()
 // http://developer.apple.com/macosx/uniformtypeidentifiers.html
 
 NSString *mimeTypeForExtension(NSString *ext)
-{
-    NSString* mimeType = nil;
+{	
+#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED <= __IPHONE_2_2
+	return @"application/octet-stream";
+#else
+	NSString* mimeType = nil;
 
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef)ext, NULL);
     if (!UTI) return nil;
@@ -140,6 +143,8 @@ NSString *mimeTypeForExtension(NSString *ext)
 
     CFRelease(UTI);
     return mimeType;
+
+#endif
 }
 
 
@@ -232,7 +237,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 	if (userInfo) [sessionInfo setObject:userInfo forKey:@"userInfo"];
 	
 	if (![actionName isEqualToString:OPLoginAction]) {
-		if ([_expirationDate compare:[NSDate date]] != NSOrderedDescending) {
+		if (_expirationDate && [_expirationDate compare:[NSDate date]] != NSOrderedDescending) {
 			[_request setSessionInfo:sessionInfo];
 			[self httpRequest:_request didFailWithError:@"Session expired."];
 		}		
@@ -273,13 +278,16 @@ NSString *mimeTypeForExtension(NSString *ext)
 		return nil;
 	}
 	NSString *dateString = [cookie substringFromIndex:dateStringStart + range.length];
-	NSUInteger dateStringEnd = [dateString rangeOfString:@";"].location;
+	NSUInteger dateStringEnd = [dateString rangeOfString:@";" options:NSLiteralSearch].location;
 	dateString = [dateString substringToIndex:dateStringEnd];
+
 	NSDateFormatter *cookieExpireDateFormatter = [[NSDateFormatter alloc] init];
+	[cookieExpireDateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
 	[cookieExpireDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
 	[cookieExpireDateFormatter setDateFormat:@"EEE, dd-MMM-yyyy HH:mm:ss zzz"];
 	NSDate *date = [cookieExpireDateFormatter dateFromString:dateString];
 	[cookieExpireDateFormatter release];
+	
 	return date;
 }
 

@@ -321,6 +321,11 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 }
 
 + (ObjectivePlurk *)sharedInstance;
+
+//- (NSArray *)qualifiers;
+//- (NSArray *)langCodes;
+- (NSString *)langCodeFromLocalIdentifier:(NSString *)locale;
+
 - (void)cancelAllRequest;
 - (void)cancelAllRequestWithDelegate:(id)delegate;
 - (BOOL)resume;
