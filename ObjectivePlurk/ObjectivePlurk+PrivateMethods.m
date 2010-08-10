@@ -306,6 +306,10 @@ NSString *mimeTypeForExtension(NSString *ext)
 		return;
 	}
 
+	if (_receivedHeader == nil) {
+		return;
+	}
+
 	NSString *cookie = [_receivedHeader valueForKey:@"Set-Cookie"];
 	NSDate *date = [self _expirationDateFromCookieString:cookie];
 	id tmp = _expirationDate;
