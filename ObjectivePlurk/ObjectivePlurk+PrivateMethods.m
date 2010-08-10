@@ -306,8 +306,7 @@ NSString *mimeTypeForExtension(NSString *ext)
 		return;
 	}
 
-	NSDictionary *header = [request receivedHeader];
-	NSString *cookie = [header valueForKey:@"Set-Cookie"];
+	NSString *cookie = [_receivedHeader valueForKey:@"Set-Cookie"];
 	NSDate *date = [self _expirationDateFromCookieString:cookie];
 	id tmp = _expirationDate;
 	_expirationDate = [date retain];
@@ -842,6 +841,10 @@ NSString *mimeTypeForExtension(NSString *ext)
 - (void)httpRequest:(LFHTTPRequest *)request didReceiveStatusCode:(NSUInteger)statusCode URL:(NSURL *)url responseHeader:(CFHTTPMessageRef)header
 {
 //	NSLog(@"%d", statusCode);
+	id tmp = _receivedHeader;
+	CFDictionaryRef headerRef = CFHTTPMessageCopyAllHeaderFields(header);
+	_receivedHeader = [[NSDictionary alloc] initWithDictionary:(NSDictionary *)headerRef];
+	[tmp release];
 }
 
 - (void)httpRequestDidCancel:(LFHTTPRequest *)request

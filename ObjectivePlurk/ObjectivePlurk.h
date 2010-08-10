@@ -317,6 +317,7 @@ extern NSString *const OPRemoveUserFromCliqueAction;
 	NSDictionary *_currentUserInfo;
 	NSDateFormatter *_dateFormatter;
 	NSDate *_expirationDate;
+	NSDictionary *_receivedHeader;
 }
 
 + (ObjectivePlurk *)sharedInstance;

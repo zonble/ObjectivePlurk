@@ -59,6 +59,7 @@ static ObjectivePlurk *sharedInstance;
 	[_langCodes release];
 	[_dateFormatter release];
 	[_expirationDate release];
+	[_receivedHeader release];
 	[super dealloc];
 }
 
