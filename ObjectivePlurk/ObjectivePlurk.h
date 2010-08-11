@@ -235,6 +235,7 @@ typedef enum {
 } OPCanComment;
 
 extern NSString *const ObjectivePlurkCookiePreferenceName;
+extern NSString *const ObjectivePlurkUserInfoPreferenceName;
 
 extern NSString *const ObjectivePlurkAPIURLString;
 extern NSString *const ObjectivePlurkErrorDomain;

@@ -32,6 +32,7 @@
 #import "ObjectivePlurk+PrivateMethods.h"
 
 NSString *const ObjectivePlurkCookiePreferenceName = @"ObjectivePlurkCookiePreferenceName";
+NSString *const ObjectivePlurkUserInfoPreferenceName = @"ObjectivePlurkUserInfoPreferenceName";
 
 NSString *const ObjectivePlurkAPIURLString = @"http://www.plurk.com";
 NSString *const ObjectivePlurkErrorDomain = @"ObjectivePlurkErrorDomain";
@@ -322,10 +323,11 @@ NSString *mimeTypeForExtension(NSString *ext)
 
 	id delegate = [sessionInfo valueForKey:@"delegate"];
 	if ([result valueForKey:@"user_info"]) {
-		NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:result];
-		[userInfo removeObjectForKey:@"plurks"];
-		[userInfo removeObjectForKey:@"plurks_users"];
+		NSMutableDictionary *userInfo = [result valueForKey:@"user_info"];
 		self.currentUserInfo = userInfo;
+		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:userInfo];
+		[[NSUserDefaults standardUserDefaults] setValue:data forKey:ObjectivePlurkUserInfoPreferenceName];
+		
 	}
 
 	if ([delegate respondsToSelector:@selector(plurk:didLoggedIn:)]) {

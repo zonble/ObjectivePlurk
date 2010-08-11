@@ -237,6 +237,8 @@ static ObjectivePlurk *sharedInstance;
 	
 	NSDictionary *requestHeader = [NSDictionary dictionaryWithObjectsAndKeys:cookie, @"Cookie", nil];
 	_request.requestHeader = requestHeader;
+	NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:ObjectivePlurkUserInfoPreferenceName];
+	self.currentUserInfo  = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 	return YES;
 }
 
@@ -250,6 +252,7 @@ static ObjectivePlurk *sharedInstance;
 	[tmp release];
 	
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:ObjectivePlurkCookiePreferenceName];
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:ObjectivePlurkUserInfoPreferenceName];
 }
 
 
