@@ -205,7 +205,23 @@ NSString *mimeTypeForExtension(NSString *ext)
 		}
 		NSString *v = [d valueForKey:key];
 		v = [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		v = [v stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+		v = [v stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+		v = [v stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
 		v = [v stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
+		v = [v stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
+		v = [v stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
+		v = [v stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
+		v = [v stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
+		v = [v stringByReplacingOccurrencesOfString:@"@" withString:@"%40"];
+		v = [v stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+		v = [v stringByReplacingOccurrencesOfString:@"\t" withString:@"%09"];
+		v = [v stringByReplacingOccurrencesOfString:@"#" withString:@"%23"];
+		v = [v stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
+		v = [v stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
+		v = [v stringByReplacingOccurrencesOfString:@"\"" withString:@"%22"];
+		v = [v stringByReplacingOccurrencesOfString:@"\n" withString:@"%0A"];
+
 		[s appendFormat:@"%@=%@", key, v];
 		if (![key isEqual:[[d allKeys] lastObject]]) {
 			[s appendString:@"&"];
