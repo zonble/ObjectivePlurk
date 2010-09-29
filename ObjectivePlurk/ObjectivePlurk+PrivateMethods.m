@@ -203,25 +203,23 @@ NSString *mimeTypeForExtension(NSString *ext)
 		if ([key isEqual:[[d allKeys] objectAtIndex:0]]) {
 			[s setString:@"?"];
 		}
-		NSString *v = [d valueForKey:key];
-		v = [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		v = [v stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
-		v = [v stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-		v = [v stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-		v = [v stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
-		v = [v stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
-		v = [v stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
-		v = [v stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-		v = [v stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
-		v = [v stringByReplacingOccurrencesOfString:@"@" withString:@"%40"];
-		v = [v stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-		v = [v stringByReplacingOccurrencesOfString:@"\t" withString:@"%09"];
-		v = [v stringByReplacingOccurrencesOfString:@"#" withString:@"%23"];
-		v = [v stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
-		v = [v stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
-		v = [v stringByReplacingOccurrencesOfString:@"\"" withString:@"%22"];
-		v = [v stringByReplacingOccurrencesOfString:@"\n" withString:@"%0A"];
-
+		NSMutableString *v = [NSMutableString stringWithString:[[d valueForKey:key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		[v replaceOccurrencesOfString:@"&" withString:@"%26" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"+" withString:@"%2B" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"," withString:@"%2C" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"/" withString:@"%2F" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@":" withString:@"%3A" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@";" withString:@"%3B" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"=" withString:@"%3D" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"?" withString:@"%3F" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"@" withString:@"%40" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@" " withString:@"%20" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"\t" withString:@"%09" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"#" withString:@"%23" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"<" withString:@"%3C" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@">" withString:@"%3E" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"\"" withString:@"%22" options:0 range:NSMakeRange(0, [v length])];
+		[v replaceOccurrencesOfString:@"\n" withString:@"%0A"options:0 range:NSMakeRange(0, [v length])];
 		[s appendFormat:@"%@=%@", key, v];
 		if (![key isEqual:[[d allKeys] lastObject]]) {
 			[s appendString:@"&"];
